@@ -4,7 +4,7 @@ void fConteudoMatriz(char matriz[20][14]);
 void fMapaOcupacao(char matriz[20][14]);
 int fVerificaApartamento(char matriz[20][14], int andar, int apto);
 void fReserva(char matriz[20][14], int andar, int apto);
-void checkIn(char matriz[20][14], int andar, int apto);
+void checkIn(char matriz[20][14], int andar, int apto);// faz o check-in a partir de uma reserva
 
 int main(void) {
   char Tab[20][14];
@@ -94,11 +94,12 @@ void fReserva(char matriz[20][14], int andar, int apto) {
 }
 
 void checkIn(char matriz[20][14], int andar, int apto){
+
   int status; //variável para receber o status do apartamento
   int a = andar, b = apto;
 
   do {
-    printf("Para fazer o check-in da sua reserva precisamos de algumas informações: );
+    printf("Para fazer o check-in da sua reserva precisamos de algumas informações: ");
   	printf("Andar e apartamento reservado: ");
   	scanf("%d %d", &a, &b);
   	
@@ -121,5 +122,5 @@ void checkIn(char matriz[20][14], int andar, int apto){
     printf("Tente outro\n");
     scanf("%d %d", &a, &b);
 
-  } while (status != 2 || status != 4); //Enquanto não for livre
+  }  while (status != 2 && status != 4);
 }
