@@ -13,6 +13,7 @@ int main(void) {
   fMapaOcupacao(Tab);
   fReserva(Tab, 6, 10);
   fMapaOcupacao(Tab);
+ checkIn(Tab, 6, 10);
 
   return 0;
 }
