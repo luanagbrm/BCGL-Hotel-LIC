@@ -66,10 +66,17 @@ void fReserva(char matriz[20][14], int andar, int apto) {
   int a = andar, b = apto;
 
   do {
+
+  	printf("Escolha um andar: ");
+  	scanf("%d", &a);
+  	
+  	printf("Escolha um apartamento: ");
+  	scanf("%d", &b);
+  	
     status = fVerificaApartamento(matriz, a, b); 
 
     if (status == 4) {
-      matriz[a][b] = 'R';
+      matriz[20 - a][ b - 1] = 'R';
       printf("Reserva realizada com sucesso\n");
       break;
     }
@@ -82,5 +89,7 @@ void fReserva(char matriz[20][14], int andar, int apto) {
     printf("Tente outro\n");
     scanf("%d %d", &a, &b);
 
-  } while (status != 4); //Enquanto não for livre
+  } while (status != 2 || status != 1); //Enquanto não for livre
+  
+  
 }
