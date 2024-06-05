@@ -39,7 +39,8 @@ int main(void) {
     printf("4 - Check-out de hospede\n");
     printf("5 - Cancelar reserva\n");
     printf("6 - Metricas de ocupacao dos quartos\n");
-    printf("7 - Sair\n");
+    printf("7 - informações do hospede\n");
+    printf("8 - Sair\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -61,13 +62,13 @@ int main(void) {
       case 6:
         fTaxaOcupacao(Tab);
         break;
-      case 7:
+      case 8:
         printf("Muito obrigada pela visita! Volte sempre e indique para amigos\n");
         break;
       default:
         printf("Opcao invalida. Tente novamente.\n");
     }
-  } while(opcao != 7);
+  } while(opcao != 8);
 
   return 0;
 }
