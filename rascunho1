@@ -82,7 +82,7 @@ void fConteudoMatriz(char matriz[20][14]) {
 
 //Apresenta o mapa de ocupação do hotel, sinalizando o andar e o apartamento.
 void fMapaOcupacao(char matriz[20][14]) {
-  printf("Apto ->\t\t");
+  printf("Apartamentos ->\t\t");
   for (int j = 0; j < 14; j++)
     printf("%d\t", j + 1);
   printf("\n\n");
