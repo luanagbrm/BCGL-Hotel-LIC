@@ -29,10 +29,10 @@ int main(void) {
   char Tab[20][14];
   int opcao;
   fConteudoMatriz(Tab);
-  
+
   printf("Bem vindo ao Hotel Sweet Home!\n");
   do{
-    printf("Hotel. O que deseja fazer?\n");
+    printf("\n O que deseja fazer?\n");
     printf("1 - Verificar a ocupacao dos quartos\n");
     printf("2 - Reservar um quarto\n");
     printf("3 - Check-in de hospede\n");
@@ -41,7 +41,7 @@ int main(void) {
     printf("6 - Metricas de ocupacao dos quartos\n");
     printf("7 - Sair\n");
     scanf("%d", &opcao);
-    
+
     switch(opcao){
       case 1:
         fMapaOcupacao(Tab);
@@ -157,19 +157,19 @@ void fCheckIn(char matriz[20][14]){
     int status; 
     int a, b;
     int booked;
-  
+
     do{
         printf("Voce ja reservou algum apartamento? (1-Sim e 0-Nao): ");
         scanf("%d", &booked);
-        
+
         if (booked == 1) {
             printf("Nos diga o andar da reserva: ");
             scanf("%d", &a);
             printf("Nos diga o quarto reservado: ");
             scanf("%d", &b);
-            
+
             status = fVerificaApartamento(matriz, a, b);
-            
+
             if (status == 1) {
                 matriz[20-a][b-1] = 'O';
                 printf("O check-in foi realizado com sucesso para o quarto %d no andar %d. Tenha uma boa estadia!\n", b, a);		   
@@ -201,36 +201,36 @@ void fCheckIn(char matriz[20][14]){
 }
 //Realiza o check-out do hospede, mudando a apresentação do mapa de ocupação do hotel 
 void fcheckOut(char matriz[20][14]){
-	int status, a, b;
-	
-	do{
-		printf("Obrigada por escolher o nosso hotel! Para fazer o check-out precisamos de algumas informacoes: \n");
-		
-		printf("O Andar do apartamento que voce esta ocupando: ");
-		scanf("%d", &a);
-		
-		printf("O quarto que voce estava ocupando: ");
-		scanf("%d", &b);
-		
-		if(a == 0 || b == 0)
+  int status, a, b;
+
+  do{
+    printf("Obrigada por escolher o nosso hotel! Para fazer o check-out precisamos de algumas informacoes: \n");
+
+    printf("O Andar do apartamento que voce esta ocupando: ");
+    scanf("%d", &a);
+
+    printf("O quarto que voce estava ocupando: ");
+    scanf("%d", &b);
+
+    if(a == 0 || b == 0)
         break;
 
- 	   status = fVerificaApartamento(matriz, a, b);
-		
-		if(status == 2){
-			matriz[20-a][b-1] = '.';
-   			printf("O check-out foi realizado com sucesso para o quarto %d no andar %d!\n",b,a);		   
-   			break;
-  	    }else if(status == 3){
-  		 	printf("O apartamento escolhido parece nao existir.Por favor, tente outro\n");
- 		  }else if(status == 4){
- 		  	printf("O quarto escolhido ja estava livre. Por favor, tente outro\n");
-		}
+     status = fVerificaApartamento(matriz, a, b);
+
+    if(status == 2){
+      matriz[20-a][b-1] = '.';
+        printf("O check-out foi realizado com sucesso para o quarto %d no andar %d!\n",b,a);		   
+        break;
+        }else if(status == 3){
+        printf("O apartamento escolhido parece nao existir.Por favor, tente outro\n");
+      }else if(status == 4){
+        printf("O quarto escolhido ja estava livre. Por favor, tente outro\n");
+    }
 //		   }else if(status == 3){
 //		   	printf("O apartamento escolhido nao existe. Por favor, tente outro");
 //		   }
-		}while(1);// enquanto o quarto escolhido existir
-	}
+    }while(1);// enquanto o quarto escolhido existir
+  }
 //Cancela a reserva do hospede e retira a visualização do apartamento reservado ('R') 
 void fCancelarReserva(char matriz[20][14]) {
   int status; //variável para receber o status do apartamento
@@ -283,11 +283,11 @@ void fTaxaOcupacao(char matriz[20][14]){
         contadorOcupado++;
   } 
 
- printf(" --------------------------------------\n");
-  printf("|%.2f dos apartamentos estão ocupados  |\n", (contadorOcupado/280)*100);
-  printf("|%.2f dos apartamentos estão reservados|\n", (contadorReservado/280)*100);
-  printf("|%.2f dos apartamentos estão livres  |\n",
+ printf(" ---------------------------------------\n");
+  printf("|%.2f%% dos apartamentos estão ocupados  |\n", (contadorOcupado/280)*100);
+  printf("|%.2f%% dos apartamentos estão reservados|\n", (contadorReservado/280)*100);
+  printf("|%.2f%% dos apartamentos estão livres  |\n",
     ((280-contadorReservado+contadorOcupado)/280)*100);
-  printf(" --------------------------------------");
-  
+  printf(" ---------------------------------------");
+
 }
