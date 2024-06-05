@@ -1,20 +1,21 @@
-//BCGL-Ativ04
-//Integrantes do grupo: Beatriz, Carolina, Grazielle e Luana - (09/06/2024)
-/*Apresentar um menu acessível para o úsuario
+//BCGL-Ativ04 - Programa Hotel.
+//Integrantes do grupo: Beatriz, Carolina, Grazielle e Luana - (09/06/2024).
+//O Hotel deve conter 20 andares e 14 apartamentos por andar.
+/*Apresentar um menu acessível para o úsuario.
 O Menu deve permitir ao úsuario:
-1 - Verificar a ocupacao dos quartos;
-2 - Reservar um quarto;
-3 - realizar o check-in de hospede;
-4 - realizar o check-out de hospede;
+1 - Verificar a ocupacao dos quartos, mostrando os andares e apartamentos do hotel;
+2 - Reservar um quarto (Deve aparecer 'R' para Reservado e 'O' para Ocupado); 
+3 - Realizar o check-in de hospede a partir de uma reserva realizada. E tornar possível
+realizar o check-in no hotel de hospede que não fez reserva;
+4 - Realizar o check-out de hospede, isto é, liberar o apartamento que estava ocupado;
 5 - Cancelar uma reserva;
 6 - Verificar a taxa de ocupação e reservas do hotel;
 7 - Permitir que o úsuario saia do programa;
-
 */
 
 #include <stdio.h>
 
-void fConteudoMatriz(char matriz[20][14]);
+void fConteudoMatriz(char matriz[20][14]);  
 void fMapaOcupacao(char matriz[20][14]);
 int fVerificaApartamento(char matriz[20][14], int andar, int apto);
 void fReserva(char matriz[20][14]);
@@ -71,7 +72,7 @@ int main(void) {
   return 0;
 }
 
-
+//Apresenta o mapa do hotel
 void fConteudoMatriz(char matriz[20][14]) {
   for (int i = 0; i < 20; i++) {
     for (int j = 0; j < 14; j++)
@@ -79,7 +80,7 @@ void fConteudoMatriz(char matriz[20][14]) {
   }
 }
 
-//Apresenta o mapa de ocupação do prédio, sinalizando o andar e o apartamento.
+//Apresenta o mapa de ocupação do hotel, sinalizando o andar e o apartamento.
 void fMapaOcupacao(char matriz[20][14]) {
   printf("Apto ->\t\t");
   for (int j = 0; j < 14; j++)
@@ -105,7 +106,7 @@ void fMapaOcupacao(char matriz[20][14]) {
 int fVerificaApartamento(char matriz[20][14], int andar, int apto) {
   int a = 20 - andar, b = apto - 1;
 
-  if (matriz[a][b] == 'R')
+  if (matriz[a][b] == 'R')     
     return 1;
 
   if (matriz[a][b] == 'O')
@@ -151,9 +152,9 @@ void fReserva(char matriz[20][14]) {
 
   } while (status != 2 || status != 1); //Enquanto não for livre
 }
-
+//Realiza o check-in do hospode em um apartamento reservado ou em um não reservado
 void fCheckIn(char matriz[20][14]){
-    int status; // variável para receber o status do apartamento
+    int status; 
     int a, b;
     int booked;
   
@@ -171,12 +172,12 @@ void fCheckIn(char matriz[20][14]){
             
             if (status == 1) {
                 matriz[20-a][b-1] = 'O';
-                printf("O check-in foi realizado com sucesso para o quarto %d no andar %d. Tenha uma boa estadia!\n\n", b, a);		   
+                printf("O check-in foi realizado com sucesso para o quarto %d no andar %d. Tenha uma boa estadia!\n", b, a);		   
                 break;
             } else if (status == 3) {
                 printf("O apartamento nao existe, por favor tente outro.\n");
             } else {
-                printf("Apartamento não está reservado. Tente outro.\n");
+                printf("Apartamento nao esta' reservado. Tente outro.\n");
             }
         } else {
             printf("Digite um andar: ");
@@ -198,7 +199,7 @@ void fCheckIn(char matriz[20][14]){
         }
     } while (1); //continua o loop até um check-in for realizado com sucesso
 }
-
+//Realiza o check-out do hospede, mudando a apresentação do mapa de ocupação do hotel 
 void fcheckOut(char matriz[20][14]){
 	int status, a, b;
 	
@@ -230,7 +231,7 @@ void fcheckOut(char matriz[20][14]){
 //		   }
 		}while(1);// enquanto o quarto escolhido existir
 	}
-
+//Cancela a reserva do hospede e retira a visualização do apartamento reservado ('R') 
 void fCancelarReserva(char matriz[20][14]) {
   int status; //variável para receber o status do apartamento
   int a, b;
@@ -265,7 +266,8 @@ void fCancelarReserva(char matriz[20][14]) {
 
     printf("Tente outro (Digite 0 para cancelar a operacao)\n");
 
-  } while (status != 4 || (a != 0 || b != 0)); //Enquanto o status do quarto digitado não for "reservado" ou o usuário não digitar 0 para cancelar a operação
+  } while (status != 4 || (a != 0 || b != 0));  //Enquanto o status do quarto digitado não for "reservado" 
+                                                //ou o usuário não digitar 0 para cancelar a operação
 }
 
 //nao é so isso aqui coloquei só o basico do basico obg
