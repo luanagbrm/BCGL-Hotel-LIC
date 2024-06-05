@@ -283,7 +283,11 @@ void fTaxaOcupacao(char matriz[20][14]){
         contadorOcupado++;
   } 
 
-  printf("%.2f estao ocupados\n", (contadorOcupado/280)*100);
-  printf("%.2f estao reservados\n", (contadorReservado/280)*100);
-  printf("%.2f estao livres\n", ((280-contadorReservado+contadorOcupado)/280)*100);
+ printf(" --------------------------------------\n");
+  printf("|%.2f dos apartamentos estão ocupados  |\n", (contadorOcupado/280)*100);
+  printf("|%.2f dos apartamentos estão reservados|\n", (contadorReservado/280)*100);
+  printf("|%.2f dos apartamentos estão livres  |\n",
+    ((280-contadorReservado+contadorOcupado)/280)*100);
+  printf(" --------------------------------------");
+  
 }
