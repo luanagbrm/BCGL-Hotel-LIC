@@ -15,6 +15,11 @@ realizar o check-in no hotel de hospede que não fez reserva;
 
 #include <stdio.h>
 
+// Estrutura para representar os quartos do hotel
+typedef struct {
+    char situation; // indica o status do apartamento
+} room;
+
 // Funções importantes para o funcionamento do programa
 void fConteudoMatriz(room matriz[20][14]);  
 void fMapaOcupacao(room matriz[20][14]);
@@ -27,11 +32,6 @@ void fcheckOut(room matriz[20][14]);
 void fProgramAvaluation(int choice);
 
 //Structures importantes para o programa
-
-// Estrutura para representar os quartos do hotel
-typedef struct {
-    char situation; // indica o status do apartamento
-} room;
 
 // Corpo do programa e interface do usuário
 int main(void) {
