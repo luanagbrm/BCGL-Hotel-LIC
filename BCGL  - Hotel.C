@@ -15,6 +15,8 @@ realizar o check-in no hotel de hospede que não fez reserva;
 
 #include <stdio.h>
 
+//Funcoes importantes para o funcionamento do programa
+
 void fConteudoMatriz(char matriz[20][14]);  
 void fMapaOcupacao(char matriz[20][14]);
 int fVerificaApartamento(char matriz[20][14], int andar, int apto);
@@ -24,6 +26,7 @@ void fCancelarReserva(char matriz[20][14]);
 void fCheckIn(char matriz[20][14]);
 void fcheckOut(char matriz[20][14]);
 
+//corpo do programa e user's interface
 
 int main(void) {
   char Tab[20][14];
@@ -39,8 +42,7 @@ int main(void) {
     printf("4 - Check-out de hospede\n");
     printf("5 - Cancelar reserva\n");
     printf("6 - Metricas de ocupacao dos quartos\n");
-    printf("7 - informações do hospede\n");
-    printf("8 - Sair\n");
+    printf("7 - Sair\n");
     scanf("%d", &opcao);
 
     switch(opcao){
@@ -62,18 +64,19 @@ int main(void) {
       case 6:
         fTaxaOcupacao(Tab);
         break;
-      case 8:
-        printf("Muito obrigada pela visita! Volte sempre e indique para amigos\n");
+      case 7:
+        printf("Saindo do programa...\n");
         break;
       default:
         printf("Opcao invalida. Tente novamente.\n");
     }
-  } while(opcao != 8);
+    
+  } while(opcao != 7);
 
   return 0;
 }
 
-//Apresenta o mapa do hotel
+//Apresenta o mapa do hotel e faz a inciacao da matriz para que todos os quartos estejam inicialmente desocupados
 void fConteudoMatriz(char matriz[20][14]) {
   for (int i = 0; i < 20; i++) {
     for (int j = 0; j < 14; j++)
@@ -97,14 +100,17 @@ void fMapaOcupacao(char matriz[20][14]) {
 }
 
 
-/* Verifica o status do apartamento. 
+
+
+int fVerificaApartamento(char matriz[20][14], int andar, int apto) {
+	
+/*A funcao Verifica o status do apartamento, sendo que:
 1 = reservado
 2 = ocupado
 3 = inválido 
 4 = livre
 */
 
-int fVerificaApartamento(char matriz[20][14], int andar, int apto) {
   int a = 20 - andar, b = apto - 1;
 
   if (matriz[a][b] == 'R')     
@@ -127,7 +133,7 @@ void fReserva(char matriz[20][14]) {
 
   do {
 
-    printf("Escolha um andar: ");
+    printf("Escolha um andar(0 para sair): ");
     scanf("%d", &a);
 
     if(a == 0){// caso o usuário queira sair da função sem sair do programa
@@ -147,7 +153,7 @@ void fReserva(char matriz[20][14]) {
 
     if (status == 4) {
       matriz[20 - a][b-1] = 'R';
-      printf("Reserva realizada com sucesso\n");
+      printf("Reserva realizada com sucesso\n\n");
       fMapaOcupacao(matriz);
       break;
     }
@@ -156,19 +162,20 @@ void fReserva(char matriz[20][14]) {
       printf("Apartamento inexistente. ");
     printf("Tente outro\n");
 
-  } while (status != 2 || status != 1); //Enquanto não for livre
+  } while (status != 2 || status != 1); //Enquanto não for nem reservado nem ocupado
 }
+
 //Realiza o check-in do hospode em um apartamento reservado ou em um não reservado
 void fCheckIn(char matriz[20][14]){
     int status; 
     int a, b;
-    int booked;
+    int booked;//variavel para saber se o usuario possui reserva previa ou nao(retorna 1 para reservado e 0 caso contrario)
 
     do{
         printf("Voce ja reservou algum apartamento? (1-Sim e 0-Nao): ");
         scanf("%d", &booked);
 
-        if (booked == 1) {
+        if (booked == 1) {// se reservou
             printf("Nos diga o andar da reserva ( 0 para sair): ");
             scanf("%d", &a);
           
@@ -191,9 +198,10 @@ void fCheckIn(char matriz[20][14]){
             } else {
                 printf("Apartamento nao esta' reservado. Tente outro.\n");
             }
-        } else {
+        } else {// se o usuario nao fez reserva
             printf("Digite um andar(0 para sair): ");
             scanf("%d", &a);
+            
             if(a == 0){// caso o usuário queira sair da função
                break;
             }
@@ -206,7 +214,8 @@ void fCheckIn(char matriz[20][14]){
             if (status == 4) {
                 matriz[20 - a][b - 1] = 'O';
                 printf("O check-in foi realizado com sucesso para o quarto %d no andar %d. Tenha uma boa estadia!\n", b, a);
-                break;
+			    break;
+			    fMapaOcupacao(matriz);
             } else if (status == 3) {
                 printf("O apartamento nao existe, por favor tente outro.\n");
             } else {
@@ -215,7 +224,8 @@ void fCheckIn(char matriz[20][14]){
         }
     } while (1); //continua o loop até um check-in for realizado com sucesso
 }
-//Realiza o check-out do hospede, mudando a apresentação do mapa de ocupação do hotel 
+
+//Realiza o check-out do hospede, mudando o status do apartamento escolhido no  mapa de ocupação do hotel 
 void fcheckOut(char matriz[20][14]){
   int status, a, b;
 
@@ -247,11 +257,10 @@ void fcheckOut(char matriz[20][14]){
       }else if(status == 4){
         printf("O quarto escolhido ja estava livre. Por favor, tente outro\n");
     }
-//		   }else if(status == 3){
-//		   	printf("O apartamento escolhido nao existe. Por favor, tente outro");
-//		   }
+
     }while(1);// enquanto o quarto escolhido existir
   }
+  
 //Cancela a reserva do hospede e retira a visualização do apartamento reservado ('R') 
 void fCancelarReserva(char matriz[20][14]) {
   int status; //variável para receber o status do apartamento
@@ -259,8 +268,12 @@ void fCancelarReserva(char matriz[20][14]) {
 
   do {
 
-    printf("Escolha um andar: ");
+    printf("Escolha um andar(0 para sair): ");
     scanf("%d", &a);
+    
+    if(a == 0) {
+    	break;
+	}
 
     printf("Escolha um apartamento: ");
     scanf("%d", &b);
@@ -271,7 +284,7 @@ void fCancelarReserva(char matriz[20][14]) {
     status = fVerificaApartamento(matriz, a, b);
 
     if(status == 2 || status == 4) { //se o quarto estiver livre ou ocupado não é possível cancelar a reserva
-      printf("Operacao indisponivel para esse quarto. Tente outro (Digite 0 para cancelar a operacao)\n");
+      printf("Operacao indisponivel para esse quarto. Tente outro \n");
       continue;
     }
 
@@ -279,19 +292,20 @@ void fCancelarReserva(char matriz[20][14]) {
     if (status == 1) {
       matriz[20 - a][b-1] = '.';
       printf("A reserva do quarto %d do andar %d foi cancelada\n", a, b);
+      fMapaOcupacao(matriz);
       break;
     }
 
     if (status == 3)
       printf("Apartamento inexistente. ");
 
-    printf("Tente outro (Digite 0 para cancelar a operacao)\n");
+    printf("Tente outro\n");
 
   } while (status != 4 || (a != 0 || b != 0));  //Enquanto o status do quarto digitado não for "reservado" 
                                                 //ou o usuário não digitar 0 para cancelar a operação
 }
 
-//nao é so isso aqui coloquei só o basico do basico obg
+//mostra ao usuario a porcentagem de ocupacao em relacao a todos os quartos do hotel
 void fTaxaOcupacao(char matriz[20][14]){
   double contadorOcupado = 0;
   double contadorReservado = 0;
@@ -305,9 +319,9 @@ void fTaxaOcupacao(char matriz[20][14]){
   } 
 
  printf(" ---------------------------------------\n");
-  printf("|%.2f%% dos apartamentos estão ocupados  |\n", (contadorOcupado/280)*100);
-  printf("|%.2f%% dos apartamentos estão reservados|\n", (contadorReservado/280)*100);
-  printf("|%.2f%% dos apartamentos estão livres  |\n",
+  printf("|%.2f%% dos apartamentos estao ocupados  |\n", (contadorOcupado/280)*100);
+  printf("|%.2f%% dos apartamentos estao reservados|\n", (contadorReservado/280)*100);
+  printf("|%.2f%% dos apartamentos estao livres  |\n",
     ((280-contadorReservado+contadorOcupado)/280)*100);
   printf(" ---------------------------------------");
 
