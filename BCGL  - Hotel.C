@@ -168,7 +168,7 @@ void fCheckIn(room matriz[20][14]) {
     int booked; // variável para saber se o usuário possui reserva prévia ou não (retorna 1 para reservado e 0 caso contrário)
 
     do {
-        printf("Você já reservou algum apartamento? (1-Sim e 0-Não): ");
+        printf("Voce ja reservou algum apartamento? (1-Sim e 0-Nao): ");
         scanf("%d", &booked);
 
         if (booked == 1) { // se reservou
@@ -190,9 +190,9 @@ void fCheckIn(room matriz[20][14]) {
                 fMapaOcupacao(matriz);
                 break;
             } else if (status == 3) {
-                printf("O apartamento não existe, por favor, tente outro.\n");
+                printf("O apartamento nao existe, por favor, tente outro.\n");
             } else {
-                printf("Apartamento não está reservado. Tente outro.\n");
+                printf("Apartamento nao esta reservado. Tente outro.\n");
             }
         } else { // se o usuário não fez reserva
             printf("Digite um andar (0 para sair): ");
@@ -213,9 +213,9 @@ void fCheckIn(room matriz[20][14]) {
                 fMapaOcupacao(matriz);
                 break;
             } else if (status == 3) {
-                printf("O apartamento não existe, por favor, tente outro.\n");
+                printf("O apartamento nao existe, por favor, tente outro.\n");
             } else {
-                printf("Apartamento não está disponível. Tente outro.\n");
+                printf("Apartamento nao esta disponível. Tente outro.\n");
             }
         }
     } while (1); //continua o loop até um check-in for realizado com sucesso
@@ -249,9 +249,9 @@ void fcheckOut(room matriz[20][14]){
       break;
         fMapaOcupacao(matriz);
   } else if (status == 3) {
-        printf("O apartamento escolhido parece não existir. Por favor, tente outro.\n");
+        printf("O apartamento escolhido parece nao existir. Por favor, tente outro.\n");
   } else if (status == 4) {
-        printf("O quarto escolhido já estava livre. Por favor, tente outro.\n");
+        printf("O quarto escolhido ja estava livre. Por favor, tente outro.\n");
 }
 
     }while(1);// enquanto o quarto escolhido existir
