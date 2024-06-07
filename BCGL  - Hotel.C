@@ -97,7 +97,7 @@ void fConteudoMatriz(room matriz[20][14]) {
 // Apresenta o mapa de ocupação do hotel
 
 void fMapaOcupacao(room matriz[20][14]) {
-    printf("Apartamentos ->\t\t");
+    printf("Aptos->\t\t");
     for (int j = 0; j < 14; j++)
         printf("%d\t", j + 1);
     printf("\n\n");
