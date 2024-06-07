@@ -49,7 +49,7 @@ int main(void) {
         printf("3 - Check-in de hospede\n");
         printf("4 - Check-out de hospede\n");
         printf("5 - Cancelar reserva\n");
-        printf("6 - Metricas de ocupacao dos quartos\n");
+        printf("6 - Ver mtricas de ocupacao dos quartos\n");
         printf("7 - Sair\n");
         scanf("%d", &opcao);
 
