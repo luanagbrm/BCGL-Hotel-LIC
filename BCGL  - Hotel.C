@@ -130,8 +130,7 @@ int fVerificaApartamento(quarto matriz[20][14], int andar, int apto) {
 // Função para reservar um apartamento
 void fReserva(quarto matriz[20][14])
 {
-    int status;
-    int andar, apto;
+    int status, andar, apto;
 
     do{
       printf("Escolha um andar(0 para sair): ");
@@ -167,9 +166,7 @@ void fReserva(quarto matriz[20][14])
 
 //Realiza o check-in do hospede em um apartamento reservado ou em um não reservado
 void fCheckIn(quarto matriz[20][14]){
-    int status;
-    int andar, apto;
-    int booked; // variável para saber se o usuário possui reserva prévia ou não (retorna 1 para reservado e 0 caso contrário)
+    int status, andar, apto, booked; // variável para saber se o usuário possui reserva prévia ou não (retorna 1 para reservado e 0 caso contrário)
 
     do {
       printf("Já foi feita uma reserva previamente? (1-Sim e 0-Nao): ");
