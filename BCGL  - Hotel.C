@@ -169,7 +169,7 @@ void fCheckIn(quarto matriz[20][14]){
     int status, andar, apto, booked; // variável para saber se o usuário possui reserva prévia ou não (retorna 1 para reservado e 0 caso contrário)
 
     do {
-      printf("Já foi feita uma reserva previamente? (1-Sim e 0-Nao): ");
+      printf("Ja foi feita uma reserva previamente? (1-Sim e 0-Nao): ");
       scanf("%d", &booked);
 
       if (booked != 1 && booked != 0){
@@ -201,7 +201,7 @@ void fCheckIn(quarto matriz[20][14]){
           
         } else { 
           if(booked)
-            printf("Nao há reserva para esse apartamento. Tente outro\n");
+            printf("Nao ha reserva para esse apartamento. Tente outro\n");
           else
             printf("Apartamento nao esta disponivel. Tente outro.\n");
         }
