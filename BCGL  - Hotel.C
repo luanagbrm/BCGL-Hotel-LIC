@@ -22,23 +22,45 @@ realizar o check-in no hotel de hospede que não fez reserva;
 typedef struct
 {
     char situacao; // indica o status do apartamento: "." = livre, "R" = reservado, "O" = ocupado
-} quarto;
+    int tipo;
+    int qntHospedes;
+} Quarto;
+
+ typedef struct
+{
+   Quarto quarto;
+  // Hospede hospede;
+   int qntHospede ;
+   int diasEstadia;
+} Reserva; 
+
 
 // Funções importantes para o funcionamento do programa
-void fInicializarMatriz(quarto matriz[20][14]);  
-void fMapaHotel(quarto matriz[20][14]);
-int fVerificaApartamento(quarto matriz[20][14], int andar, int apto);
-void fReserva(quarto matriz[20][14]);
-void fTaxaOcupacao(quarto matriz[20][14]);
-void fCancelarReserva(quarto matriz[20][14]);
-void fCheckIn(quarto matriz[20][14]);
-void fCheckOut(quarto matriz[20][14]);
+void fInicializarMatriz(Quarto matriz[20][14]);  
+void fMapaHotel(Quarto matriz[20][14]);
+int fVerificaApartamento(Quarto matriz[20][14], int andar, int apto);
+void fReserva(Quarto matriz[20][14]);
+void fTaxaOcupacao(Quarto matriz[20][14]);
+void fCancelarReserva(Quarto matriz[20][14]);
+void fCheckIn(Quarto matriz[20][14]);
+void fCheckOut(Quarto matriz[20][14]);
+void fDadosdoHospede(Quarto matriz[20][14],char nome, char cpf, char email, char ender, char dataN, char tel);
 
 // Corpo do programa e interface do usuário
 int main(void) 
 {
-    quarto Tab[20][14]; // Matriz de quartos
+    Quarto Tab[20][14]; // Matriz de quartos
     int opcao;
+    
+    
+    //tipos de apartamento por andar 
+    int standard[2]={14,1};  
+    int master[2]={18,15};
+    int deluxe[2]={20,19};
+    //tipos de apartamento por quarto
+    int single[2]={4,1};
+    int couple[2]={9,5};
+    int family[2]={14,10};
 
     fInicializarMatriz(Tab);
 
@@ -91,7 +113,7 @@ int main(void)
 }
 
 // Inicializa a matriz de quartos
-void fInicializarMatriz(quarto matriz[20][14]) 
+void fInicializarMatriz(Quarto matriz[20][14]) 
 {
     for (int i = 0; i < 20; i++)
       for (int j = 0; j < 14; j++) 
@@ -99,7 +121,7 @@ void fInicializarMatriz(quarto matriz[20][14])
 }
 
 // Apresenta o mapa de ocupação do hotel
-void fMapaHotel(quarto matriz[20][14]) 
+void fMapaHotel(Quarto matriz[20][14]) 
 {
     system("cls||clear");
     printf("---------------------------------------\n");
@@ -121,7 +143,7 @@ void fMapaHotel(quarto matriz[20][14])
 }
 
 // Verifica o status de um apartamento
-int fVerificaApartamento(quarto matriz[20][14], int andar, int apto) 
+int fVerificaApartamento(Quarto matriz[20][14], int andar, int apto) 
 {
     int a = 20 - andar, b = apto - 1;
 
@@ -141,7 +163,7 @@ int fVerificaApartamento(quarto matriz[20][14], int andar, int apto)
 }
 
 // Função para reservar um apartamento
-void fReserva(quarto matriz[20][14])
+void fReserva(Quarto matriz[20][14])
 {
     int status, andar, apto;
 
@@ -187,7 +209,7 @@ void fReserva(quarto matriz[20][14])
 }
 
 //Realiza o check-in do hospede em um apartamento reservado ou em um não reservado
-void fCheckIn(quarto matriz[20][14])
+void fCheckIn(Quarto matriz[20][14])
 {
     int status, andar, apto, booked; // variável para saber se o usuário possui reserva prévia ou não (retorna 1 para reservado e 0 caso contrário)
 
@@ -247,7 +269,7 @@ void fCheckIn(quarto matriz[20][14])
 }
 
 //Realiza o check-out do hospede, mudando o status do apartamento escolhido no mapa de ocupação do hotel 
-void fCheckOut(quarto matriz[20][14]) 
+void fCheckOut(Quarto matriz[20][14]) 
 {
     int status, andar, apto;
 
@@ -299,7 +321,7 @@ void fCheckOut(quarto matriz[20][14])
 }
 
 //Cancela a reserva do hospede e retira a visualização do apartamento reservado ('R') 
-void fCancelarReserva(quarto matriz[20][14]) 
+void fCancelarReserva(Quarto matriz[20][14]) 
 {
     int status; //variável para receber o status do apartamento
     int a, b;
@@ -348,7 +370,7 @@ void fCancelarReserva(quarto matriz[20][14])
 }
 
 //Mostra ao usuario a porcentagem de ocupacao em relacao a todos os quartos do hotel
-void fTaxaOcupacao(quarto matriz[20][14])
+void fTaxaOcupacao(Quarto matriz[20][14])
 {
     double contadorOcupado = 0;
     double contadorReservado = 0;
