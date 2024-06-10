@@ -14,9 +14,9 @@ typedef struct{
 
 typedef struct{
   char name[40];
-  char cpf[11];
+  char cpf[12];
   // char adress[50];
-  char phone[11];
+  char phone[12];
   char email[20];
   EndCompleto endereco;
 
@@ -336,65 +336,50 @@ void fTaxaOcupacao(char matriz[20][14]){
 
 }
 
-//typedef struct{
-//	char name[70];
-//	char cpf[12];
-//	char adress[100];
-//	char phone[15];
-//	char email[70];
-//	
-//}guest; // stores guest info
-
 
 void fHospedeInfo(Guest *hospede){
-  
   printf("Antes de prosseguir, precisamos de alguns dados pessoais do hospede: \n\n");
 
-  printf("Nome do hospede: ");
-  gets(hospede -> name);
   fclear();
+  printf("Nome do hospede: ");
+  gets(hospede->name);
 
   printf("Celular do hospede: ");
-  gets(hospede -> phone);
+  gets(hospede->phone);
 
   printf("CPF do hospede: ");
-  gets(hospede -> cpf);
+  gets(hospede->cpf);
 
   printf("Email do hospede: ");
-  gets(hospede -> email);
-  fclear();
-  
+  gets(hospede->email);
+
   printf("Agora, precisamos de algumas informacoes sobre o endereco : \n\n");
 
   printf("CEP: ");
-  gets(hospede -> endereco.cep);
-  fclear();
+  gets(hospede->endereco.cep);
 
   printf("Numero da residencia: ");
-  gets(hospede -> endereco.numero);
- 
+  gets(hospede->endereco.numero);
 
   printf("Complemento: ");
-  gets(hospede -> endereco.complemento);
-  
+  gets(hospede->endereco.complemento);
+
   printf("Logradouro do hospede: ");
-  gets(hospede -> endereco.logradouro);
+  gets(hospede->endereco.logradouro);
 
   printf("Bairro: ");
-  gets(hospede -> endereco.bairro);
+  gets(hospede->endereco.bairro);
 
   printf("Cidade: ");
-  gets(hospede -> endereco.cidade);
+  gets(hospede->endereco.cidade);
 
   printf("UF: ");
-  gets(hospede -> endereco.uf);
-  
+  gets(hospede->endereco.uf);
+
   printf("\nAs informacoes do hospede foram cadastradas com sucesso!\n");
 }
-void fclear(){//wipes off the buffer from the keyboard
 
-    while(getchar() != '\n');
-
-//	char carac;
-//	while((carac = fgetc(stdin)) != EOF && carac != '\n'){}
+void fclear() { // Wipes off the buffer from the keyboard
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF);
 }
