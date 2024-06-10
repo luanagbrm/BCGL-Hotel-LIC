@@ -1,5 +1,5 @@
-//BCGL-Ativ04 - Programa Hotel.
-//Integrantes do grupo: Beatriz, Carolina, Grazielle e Luana - (09/06/2024).
+//BCGL-Hotel-Ativ04 - Programa Hotel.
+//Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (09/06/2024).
 //O Hotel deve conter 20 andares e 14 apartamentos por andar.
 /*Apresentar um menu acessível para o úsuario.
 O Menu deve permitir ao úsuario:
