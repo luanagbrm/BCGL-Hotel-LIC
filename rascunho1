@@ -3,28 +3,28 @@
 //algumas estruturas importantes 
 
 typedef struct{
-	char name[40];
-	char cpf[11];
-	char adress[50];
-	char phone[11];
-	char email[20];
-	
-	
+  char cep[14];
+  char numero[5];
+  char complemento[2];
+  char logradouro[25];
+  char bairro[30];
+  char cidade[20];
+  char uf[3];
+}EndCompleto;
+
+typedef struct{
+  char name[40];
+  char cpf[11];
+  // char adress[50];
+  char phone[11];
+  char email[20];
+  EndCompleto endereco;
+
 }Guest; // stores guest info
 
 
-typedef struct{
-	char cep[14];
-	char numero[5];
-	char complemento[2];
-	char logradouro[25];
-	char bairro[30];
-	char cidade[20];
-	char uf[3];
-}EndCompleto;
-
 //sturcture aparte para adress, funcao para pedir dados do guest
-//colocar condicao para limitacao para as variaveis do guest
+
 
 //typedef struct{
 //	int roomNumber;
@@ -52,7 +52,7 @@ int main(void) {
   char Tab[20][14];
   int opcao;
   fConteudoMatriz(Tab);
-  
+
   Guest hospede;
 
   printf("Bem vindo ao Hotel Sweet Home!\n");
@@ -88,8 +88,8 @@ int main(void) {
         fTaxaOcupacao(Tab);
         break;
       case 7:
-      	fHospedeInfo(&hospede);
-      	break;
+        fHospedeInfo(&hospede);
+        break;
       case 8:
 //        printf("n");
         break;
@@ -152,16 +152,16 @@ int fVerificaApartamento(char matriz[20][14], int andar, int apto) {
 void fReserva(char matriz[20][14]) {
   int status; //variável para receber o status do apartamento
   int a, b;
-  
+
   do {
-    
+
     printf("Escolha um andar(0 para sair): ");
     scanf("%d", &a);
-    
+
     if( a == 0){
-    	printf("Saindo do programa...\n");
-    	break;
-	}
+      printf("Saindo do programa...\n");
+      break;
+  }
 
     printf("Escolha um apartamento: ");
     scanf("%d", &b);
@@ -200,12 +200,12 @@ void fCheckIn(char matriz[20][14]){
         if (booked == 1) {
             printf("Nos diga o andar da reserva( 0 para sair): ");
             scanf("%d", &a);
-            
+
              if( a == 0){
-    			printf("Saindo do programa...\n");
-    			break;
-			}
-			
+          printf("Saindo do programa...\n");
+          break;
+      }
+
             printf("Nos diga o quarto reservado: ");
             scanf("%d", &b);
 
@@ -256,7 +256,7 @@ void fcheckOut(char matriz[20][14]){
 
     if(a == 0 || b == 0)
         break;
- 
+
 
     if(status == 2){
       matriz[20-a][b-1] = '.';
@@ -310,7 +310,7 @@ void fCancelarReserva(char matriz[20][14]) {
 
   } while (status != 4 || (a != 0 || b != 0));  //Enquanto o status do quarto digitado não for "reservado" 
                                                 //ou o usuário não digitar 0 para cancelar a operação
-                                                
+
     fMapaOcupacao(matriz);
 }
 
@@ -347,28 +347,54 @@ void fTaxaOcupacao(char matriz[20][14]){
 
 
 void fHospedeInfo(Guest *hospede){
-	printf("Antes de prosseguir, precisamos de algumas informacoes: \n\n");
-	
-	printf("Nome do hospede: ");
-	gets(hospede -> name);
-	fclear();
-    
-	printf("Celular do hospede: ");
-	gets(hospede -> phone);
+  
+  printf("Antes de prosseguir, precisamos de alguns dados pessoais do hospede: \n\n");
 
-	printf("CPF do hospede: ");
-	gets(hospede -> cpf);
-	
-	printf("Email do hospede: ");
-	gets(hospede -> email);
-	fclear();
+  printf("Nome do hospede: ");
+  gets(hospede -> name);
+  fclear();
 
+  printf("Celular do hospede: ");
+  gets(hospede -> phone);
+
+  printf("CPF do hospede: ");
+  gets(hospede -> cpf);
+
+  printf("Email do hospede: ");
+  gets(hospede -> email);
+  fclear();
+  
+  printf("Agora, precisamos de algumas informacoes sobre o endereco : \n\n");
+
+  printf("CEP: ");
+  gets(hospede -> endereco.cep);
+  fclear();
+
+  printf("Numero da residencia: ");
+  gets(hospede -> endereco.numero);
+ 
+
+  printf("Complemento: ");
+  gets(hospede -> endereco.complemento);
+  
+  printf("Logradouro do hospede: ");
+  gets(hospede -> endereco.logradouro);
+
+  printf("Bairro: ");
+  gets(hospede -> endereco.bairro);
+
+  printf("Cidade: ");
+  gets(hospede -> endereco.cidade);
+
+  printf("UF: ");
+  gets(hospede -> endereco.uf);
+  
+  printf("\nAs informacoes do hospede foram cadastradas com sucesso!\n");
 }
 void fclear(){//wipes off the buffer from the keyboard
 
     while(getchar() != '\n');
-    
+
 //	char carac;
 //	while((carac = fgetc(stdin)) != EOF && carac != '\n'){}
 }
-
