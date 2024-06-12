@@ -59,6 +59,7 @@ void fCancelarReserva(quarto matriz[20][14]);
 void fCheckIn(quarto matriz[20][14]);
 void fCheckOut(quarto matriz[20][14]);
 void fHospedeInfo(Guest *hospede);
+int dataValiDation(Guest *hospede);
 void fshowGuestInfo(Guest *hospede);
 void fclearBuffer();
 // Corpo do programa e interface do usuário
@@ -411,10 +412,15 @@ void fTaxaOcupacao(quarto matriz[20][14])
     printf(" ---------------------------------------");
 }
 
+//funcao para pedir os dados do hospede
 void fHospedeInfo(Guest *hospede){
   printf("\nAntes de prosseguir, precisamos de alguns dados pessoais do hospede: \n\n");
 
   fclearBuffer();
+
+  printf("CPF do hospede: ");
+  gets(hospede->cpf);
+  
   printf("Nome do hospede: ");
   gets(hospede->name);
 
@@ -453,13 +459,34 @@ void fHospedeInfo(Guest *hospede){
   printf("\nAs informacoes do hospede foram cadastradas com sucesso!\n");
 }
 
+//Assegura o input do user não seja vazio em todos os campos a partir da utilizacao do "||"
+int dataValidation(Guest *hospede) {
+    if (hospede->name[0] != '\0' ||
+        hospede->phone[0] != '\0' ||
+        hospede->cpf[0] != '\0' ||
+        hospede->email[0] != '\0' ||
+        hospede->endereco.cep[0] != '\0' ||
+        hospede->endereco.numero[0] != '\0' ||
+        hospede->endereco.complemento[0] != '\0' ||
+        hospede->endereco.logradouro[0] != '\0' ||
+        hospede->endereco.bairro[0] != '\0' ||
+        hospede->endereco.cidade[0] != '\0' ||
+        hospede->endereco.uf[0] != '\0') {
+        return 1; //Input valido
+    } else {
+        return 0; // input vazio
+    }
+}
+
+// funcao para mostrar os dados cadastrados do hospede(se todos nao forem todos vazios)
 void fshowGuestInfo(Guest *hospede){
 
+  if(dataValidation(hospede)){
   system("cls||clear");
   printf("---------------------------------------\n");
   printf("Informacoes cadastradas do hospede:\n");
   printf("---------------------------------------\n");
-
+ 
   printf("Nome: %s\n", hospede -> name);
   printf("Numero de celular: %s\n", hospede -> phone);
   printf("CPF: %s\n", hospede -> cpf);
@@ -471,10 +498,13 @@ void fshowGuestInfo(Guest *hospede){
   printf("Bairro: %s\n", hospede -> endereco.bairro);
   printf("Cidade: %s\n", hospede -> endereco.cidade);
   printf("UF: %s\n", hospede -> endereco.uf);
-
+  }else{
+    printf("\nNao foi possivel encontrar nenhuma informacao cadastrada do hospede.Tente realizar o cadastramento primeiro\n");
+  }
 }
 
-void fclearBuffer() { // Wipes off the buffer from the keyboard
+//funcao para limpar o buffer
+void fclearBuffer() { 
   int c;
   while ((c = getchar()) != '\n' && c != EOF);
 }
