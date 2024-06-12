@@ -182,7 +182,7 @@ void fReserva(quarto matriz[20][14])
     do
   {
         fHospedeInfo(&hospede);//pede os dados do hospede antes de fazer uma reserva
-    
+
         printf("Escolha um andar(0 para sair): ");
         scanf("%d", &andar);
 
@@ -239,7 +239,7 @@ void fCheckIn(quarto matriz[20][14])
       else 
       {     
             fHospedeInfo(&hospede);//solicita os dados pessoais do hospede antes de realizar o check-in
-        
+
             printf("Informe o andar do quarto a ser ocupado (0 para sair): ");
             scanf("%d", &andar);
 
@@ -455,8 +455,12 @@ void fHospedeInfo(Guest *hospede){
 
 void fshowGuestInfo(Guest *hospede){
 
-  printf("\nAqui estao as informacoes cadastradas do hospede:\n\n");
-  printf("Nome do hospede: %s\n", hospede -> name);
+  system("cls||clear");
+  printf("---------------------------------------\n");
+  printf("Informacoes cadastradas do hospede:\n");
+  printf("---------------------------------------\n");
+
+  printf("Nome: %s\n", hospede -> name);
   printf("Numero de celular: %s\n", hospede -> phone);
   printf("CPF: %s\n", hospede -> cpf);
   printf("Email:  %s\n", hospede -> email);
