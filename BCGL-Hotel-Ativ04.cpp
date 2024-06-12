@@ -181,7 +181,8 @@ void fReserva(quarto matriz[20][14])
 
     do
   {
-  fHospedeInfo(&hospede);
+        fHospedeInfo(&hospede);//pede os dados do hospede antes de fazer uma reserva
+    
         printf("Escolha um andar(0 para sair): ");
         scanf("%d", &andar);
 
@@ -236,7 +237,9 @@ void fCheckIn(quarto matriz[20][14])
             printf("Opção inválida. Por favor, tente novamente escolhendo entre (1-Sim e 0-Nao)\n\n");
         } 
       else 
-      {
+      {     
+            fHospedeInfo(&hospede);//solicita os dados pessoais do hospede antes de realizar o check-in
+        
             printf("Informe o andar do quarto a ser ocupado (0 para sair): ");
             scanf("%d", &andar);
 
@@ -409,7 +412,7 @@ void fTaxaOcupacao(quarto matriz[20][14])
 }
 
 void fHospedeInfo(Guest *hospede){
-  printf("Antes de prosseguir, precisamos de alguns dados pessoais do hospede: \n\n");
+  printf("\nAntes de prosseguir, precisamos de alguns dados pessoais do hospede: \n\n");
 
   fclearBuffer();
   printf("Nome do hospede: ");
@@ -464,7 +467,7 @@ void fshowGuestInfo(Guest *hospede){
   printf("Bairro: %s\n", hospede -> endereco.bairro);
   printf("Cidade: %s\n", hospede -> endereco.cidade);
   printf("UF: %s\n", hospede -> endereco.uf);
-  
+
 }
 
 void fclearBuffer() { // Wipes off the buffer from the keyboard
