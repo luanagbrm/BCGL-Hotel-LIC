@@ -114,7 +114,7 @@ int main(void)
                 printf("Opção inválida. Tente novamente.\n");
         }
 
-    } while(opcao != 7);
+    } while(opcao != 8);
 
     return 0;
 }
