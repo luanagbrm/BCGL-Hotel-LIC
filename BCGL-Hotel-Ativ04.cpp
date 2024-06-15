@@ -93,6 +93,7 @@ int fDeterminarMaxMin(int andarPref, int tipoAndar, Quarto matriz[20][14], int q
 void fHospedeQuarto (int andar, int apto,Quarto matriz[20][14]);
 void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, Hospede hospede, int qtd, int diasEstadia);
 void fImprimirDados(Hospede hospede);
+int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]);
 
 int andar, apto;
 
@@ -709,6 +710,21 @@ void fImprimirDados(Hospede hospede){
   }
 }
 
+//verifica se o CPF cadastrado é igual ao do check-in 
+int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]){
+	int i = 0;
+	
+	do{
+		
+	if (cpfReserva[i] == '\0' && cpfCheckin[i] == '\0') {
+        return 1; // CPFs são iguais
+    } else {
+        return 0; // CPFs são diferentes
+    }
+		
+	}while(1);	
+
+}
 // void fImprimirDadosPorCPF(char cpf[12]){
   
 
