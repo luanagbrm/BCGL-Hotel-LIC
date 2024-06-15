@@ -90,9 +90,11 @@ int fVerificaTipoApto(int qtd);
 int fDeterminarMaisProximo(int sequencia[], int andarPref);
 int fDeterminarAndar(int andarPref, int tipo);
 int fDeterminarMaxMin(int andarPref, int tipoAndar, Quarto matriz[20][14], int qtd, int andarapto[2]);
-Hospede fHospedeQuarto (int andar, int apto);
+void fHospedeQuarto (int andar, int apto,Quarto matriz[20][14]);
 void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, Hospede hospede, int qtd, int diasEstadia);
+void fImprimirDados(Hospede hospede);
 
+int andar, apto;
 
 
 // Corpo do programa e interface do usuário
@@ -142,7 +144,7 @@ int main(void)
                 fTaxaOcupacao(Tab);
                 break;
             case 7:
-                //fshowGuestInfo(cpf[12]);
+                fHospedeQuarto(andar, apto, Tab);
                 break;
             default:
                 printf("Opção inválida. Tente novamente.\n");
@@ -378,16 +380,39 @@ void fDadosReserva(Quarto matriz[20][14])
 
 
 
-// Hospede fHospedeQuarto (int andar, int apto, Quarto matriz[20][14]){
-//    status = fVerificaApartamento(matriz, andar, apto);
-//    if (status == 4){
-//     printf ("Apartamento disponivel\n");
-//    } else if (status == 1 || status == 2){
-//     fshowGuestInfo(Quarto[20-andar][apto-1].)
-//   }
 
+void fHospedeQuarto(int andar, int apto, Quarto matriz[20][14]) {
+	
+    do {
+    	
+        printf("Digite o andar(0 para sair): ");
+        scanf("%d", &andar);
 
-// }
+        if (andar == 0) {
+            break;
+        }
+
+        printf("Digite o apartamento: ");
+        scanf("%d", &apto);
+
+        int status = fVerificaApartamento(matriz, andar, apto);
+
+        if (status == 1) {
+            printf("\nO apartamento %d no andar %d está reservado.\n", apto, andar);
+            Hospede hospede = matriz[20 - andar][apto - 1].hospede;
+            fImprimirDados(hospede);
+        }else if(status == 2) {
+            printf("\nO apartamento %d no andar %d está ocupado.\n", apto, andar);
+            Hospede hospede = matriz[20 - andar][apto - 1].hospede;
+            fImprimirDados(hospede);
+        }else if(status == 4){
+        	printf("\nO apartamento %d no andar %d está livre.\n", apto, andar);
+		}else{
+			printf("\nApartamento inexistente.\n", apto, andar);
+		}
+    }while(1);
+}
+
 
 
 
