@@ -382,7 +382,9 @@ void fDadosReserva(Quarto matriz[20][14])
 
 
 void fHospedeQuarto(int andar, int apto, Quarto matriz[20][14]) {
+	
     do {
+    	
         printf("Digite o andar(0 para sair): ");
         scanf("%d", &andar);
 
@@ -395,13 +397,19 @@ void fHospedeQuarto(int andar, int apto, Quarto matriz[20][14]) {
 
         int status = fVerificaApartamento(matriz, andar, apto);
 
-        if (status == 1 || status == 2) {
-            Hospede hospede = matriz[andar - 1][apto - 1].hospede;
-            printf("\nInformações do hóspede no quarto %d no andar %d:\n", apto, andar);
+        if (status == 1) {
+            printf("\nO apartamento %d no andar %d está reservado.\n", apto, andar);
+            Hospede hospede = matriz[20 - andar][apto - 1].hospede;
             fImprimirDados(hospede);
-        } else {
-            printf("\nO apartamento está livre ou inexistente.\n");
-        }
+        }else if(status == 2) {
+            printf("\nO apartamento %d no andar %d está ocupado.\n", apto, andar);
+            Hospede hospede = matriz[20 - andar][apto - 1].hospede;
+            fImprimirDados(hospede);
+        }else if(status == 4){
+        	printf("\nO apartamento %d no andar %d está livre.\n", apto, andar);
+		}else{
+			printf("\nApartamento inexistente.\n", apto, andar);
+		}
     }while(1);
 }
 
