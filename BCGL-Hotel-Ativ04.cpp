@@ -445,7 +445,7 @@ void fCheckIn(Quarto matriz[20][14])
       else 
       {     
             Hospede hospede;
-            fHospedeInfo();//solicita os dados pessoais do hospede antes de realizar o check-in
+             hospede = fHospedeInfo();//solicita os dados pessoais do hospede antes de realizar o check-in
 
             printf("Informe o andar do quarto a ser ocupado (0 para sair): ");
             scanf("%d", &andar);
