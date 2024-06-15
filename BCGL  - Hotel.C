@@ -545,11 +545,12 @@ void fCheckIn(Quarto matriz[20][14])
 	}
 }
 
-void fCheckInComReserva(Quarto matriz[20][14])
-{
+void fCheckInComReserva(Quarto matriz[20][14]) {
     int andar, apto;
     int status;
     char cpf[12];
+    Hospede hospede;
+    int reservaEncontrada = 0;
 
     system("cls||clear");
     printf("---------------------------------------\n");
@@ -557,56 +558,46 @@ void fCheckInComReserva(Quarto matriz[20][14])
     printf("---------------------------------------\n");
 
     // Solicita o CPF do hóspede
-    fSolicitarCPF(matriz);
-
     printf("Informe o CPF do hóspede para buscar a reserva: ");
     scanf("%s", cpf);
 
     // Verifica se há uma reserva para o CPF informado
-    int reservaEncontrada = fDadosHospedePorCPF(cpf, matriz);
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 14; j++) {
+            if (matriz[i][j].situacao == 'R' && strcmp(matriz[i][j].hospede.cpf, cpf) == 0) {
+                reservaEncontrada = 1;
+                andar = 20 - i;
+                apto = j + 1;
+                break;
+            }
+        }
+        if (reservaEncontrada) {
+            break;
+        }
+    }
+
     if (!reservaEncontrada) {
         printf("Nenhuma reserva encontrada para o CPF informado.\n");
         return;
     }
 
-    do {
-        printf("Informe o andar do quarto reservado (0 para sair): ");
-        scanf("%d", &andar);
+    // Solicita confirmação do hóspede
+    printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Não): ", andar, apto);
+    int confirmar;
+    scanf("%d", &confirmar);
 
-        if (andar == 0) // caso o usuário queira sair da função sem sair do programa
-            break;
+    if (confirmar != 1) {
+        printf("Check-in cancelado.\n");
+        return;
+    }
 
-        printf("Informe o número do quarto reservado (0 para sair): ");
-        scanf("%d", &apto);
-
-        if (apto == 0) // caso o usuário queira sair da função sem sair do programa
-            break;
-
-        status = fVerificaApartamento(matriz, andar, apto);
-
-        if (status == 1) {
-            // Check-in
-            Hospede hospede = fHospedeInfo();
-            matriz[20 - andar][apto - 1].situacao = 'O';
-            matriz[20 - andar][apto - 1].hospede = hospede;
-            printf("\nCheck-in realizado com sucesso para o quarto %d no andar %d\n", apto, andar);
-            fMapaHotel(matriz);
-            break;
-        }
-
-        if (status == 2) {
-            printf("O apartamento já está ocupado. Tente outro.\n\n");
-        }
-
-        if (status == 3) {
-            printf("Apartamento inexistente. Tente outro.\n\n");
-        }
-
-        if (status == 4) {
-            printf("O apartamento não está reservado. Tente outro.\n\n");
-        }
-    } while (status != 1 || (andar != 0 || apto != 0));
-}
+    // Realiza o check-in
+    hospede = fHospedeInfo();
+    matriz[20 - andar][apto - 1].situacao = 'O';
+    matriz[20 - andar][apto - 1].hospede = hospede;
+    printf("\nCheck-in realizado com sucesso para o quarto %d no andar %d\n", apto, andar);
+    fMapaHotel(matriz);
+} 
    
 void fCheckInSemReserva(Quarto matriz[20][14])
 {
