@@ -841,4 +841,4 @@ int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]) {
         }
         i++;
     }while(1);
-
+}
