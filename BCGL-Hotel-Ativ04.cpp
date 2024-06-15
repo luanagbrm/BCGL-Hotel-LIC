@@ -711,19 +711,17 @@ void fImprimirDados(Hospede hospede){
 }
 
 //verifica se o CPF cadastrado é igual ao do check-in 
-int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]){
-	int i = 0;
-	
-	do{
-		
-	if (cpfReserva[i] == '\0' && cpfCheckin[i] == '\0') {
-        return 1; // CPFs são iguais
-    } else {
-        return 0; // CPFs são diferentes
-    }
-		
-	}while(1);	
+int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]) {
+    int i = 0;
 
+    do {
+        if (cpfReserva[i] == '\0' && cpfCheckin[i] == '\0') {
+            return 1; // CPFs são iguais
+        } else if (cpfReserva[i] != cpfCheckin[i]) {
+            return 0; // CPFs são diferentes
+        }
+        i++;
+    }while(1);
 }
 // void fImprimirDadosPorCPF(char cpf[12]){
   
