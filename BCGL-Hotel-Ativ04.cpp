@@ -480,7 +480,7 @@ void fCheckInComReserva(Quarto matriz[20][14])
     }
 
     // Se a situação do apartamento for "reservado" e o hospede possuir reserva prévia OU se a situação do apartamento for "livre" e o hospede não possuir reserva, o check-in é realizado
-    if (status == 4 )
+    if (status == 1 || status == 4)
     { 
         matriz[20 - andar][apto - 1].situacao = 'O'; // Marca o quarto como ocupado
         printf("\nO check-in foi realizado com sucesso para o quarto %d no andar %d\n", apto, andar);
@@ -519,7 +519,7 @@ void fCheckInSemReserva(Quarto matriz[20][14])
     }
 
     // Se a situação do apartamento for "reservado" e o hospede possuir reserva prévia OU se a situação do apartamento for "livre" e o hospede não possuir reserva, o check-in é realizado
-    if (status == 4)
+    if (status == 1 || status == 4)
     { 
         matriz[20 - andar][apto - 1].situacao = 'O'; // Marca o quarto como ocupado
         printf("\nO check-in foi realizado com sucesso para o quarto %d no andar %d\n", apto, andar);
