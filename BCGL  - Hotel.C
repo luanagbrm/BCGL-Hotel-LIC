@@ -85,6 +85,7 @@ void fImprimirDados(Hospede hospede);
 int fDadosHospedePorCPF(char cpf[12], Quarto matriz[20][14]);
 void fHospedeQuarto (Quarto matriz[20][14]);
 void fSolicitarCPF(Quarto matriz[20][14]);
+int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]);
 
 
 // Funções relacionadas às funcionalidades da reserva
@@ -828,4 +829,16 @@ void fTaxaOcupacao(Quarto matriz[20][14])
         (((280-(contadorReservado+contadorOcupado))/280)*100));
     printf(" ---------------------------------------");
 }
+
+int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]) {
+    int i = 0;
+
+    do {
+        if (cpfReserva[i] == '\0' && cpfCheckin[i] == '\0') {
+            return 1; // CPFs são iguais
+        } else if (cpfReserva[i] != cpfCheckin[i]) {
+            return 0; // CPFs são diferentes
+        }
+        i++;
+    }while(1);
 
