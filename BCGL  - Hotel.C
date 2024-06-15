@@ -830,15 +830,25 @@ void fTaxaOcupacao(Quarto matriz[20][14])
     printf(" ---------------------------------------");
 }
 
-int fVerificaHospede(char cpfReserva[12], char cpfCheckin[12]) {
-    int i = 0;
+int fVerificaHospede(char cpfReserva[12], Quarto matriz[20][14])
+{
+    int encontrado = 0; //indica se o hospede foi encontrado pelo cpf
 
-    do {
-        if (cpfReserva[i] == '\0' && cpfCheckin[i] == '\0') {
-            return 1; // CPFs são iguais
-        } else if (cpfReserva[i] != cpfCheckin[i]) {
-            return 0; // CPFs são diferentes
+    for (int i = 0; i < 20; i++)
+    {
+        for (int j = 0; j < 14; j++)
+        {
+            //verifica se o cpf e o mesmo e se o quarto esta reservado
+            if (strcmp(matriz[i][j].hospede.cpf, cpfReserva) == 0 && matriz[i][j].situacao == 'R')
+            {
+                encontrado = 1;
+                break;
+            }
         }
-        i++;
-    }while(1);
+        if (encontrado)
+            break;
+    }
+
+    return encontrado;
 }
+
