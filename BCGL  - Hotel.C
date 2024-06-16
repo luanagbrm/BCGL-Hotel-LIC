@@ -10,7 +10,10 @@ realizar o check-in no hotel de hospede que não fez reserva;
 4 - Realizar o check-out de hospede, isto é, liberar o apartamento que estava ocupado;
 5 - Cancelar uma reserva;
 6 - Verificar a taxa de ocupação e reservas do hotel;
-7 - Permitir que o úsuario saia do programa;
+7- Ver informações do hospede
+8- Verificar métricas de ocupação dos quartos, mostrando a porcentagem dos apartamentos
+que estão ocupados, reservados e livres
+12 - Permitir que o úsuario saia do programa;
 */
 
 #include <stdio.h>
