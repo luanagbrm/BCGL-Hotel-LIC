@@ -9,7 +9,8 @@ O Menu deve permitir e encaminhar o úsuario:
     - "Standard" será o mais barato e contará com os apartamentos do andar 1 ao 14.
     - "Master" será um pouco mais caro e contará com os apartamentos do andar 14 ao 18.
     - "Deluxe" será o mais caro e contará com os apartamentos dos andares 19 e 20.
-Além disso, o apartamento será decidido também a partir da quantidade de pessoas hospedadas. Sendo os apartamentos de 1 a 4 para até 2 pessoas (single), de 5 a 9 para até 3 pessoas (couple), de 10 a 14 para até 5 pessoas (family). 
+Além disso, o apartamento será decidido também a partir da quantidade de pessoas hospedadas. 
+Sendo os apartamentos de 1 a 4 para até 2 pessoas (single), de 5 a 9 para até 3 pessoas (couple), de 10 a 14 para até 5 pessoas (family). 
     - O sistema dará preferência para ocupar os apartamentos de menor capacidade primeiro.
 
 3 - Reservar um apartamento a partir da solicitação do cadastro do hospede, o tipo de apartamento que ele deseja, a
@@ -148,14 +149,14 @@ int main(void)
       //Menu para o usuário
         printf("\n---------------------------------------\n");
         printf("O que deseja fazer?\n");
-        printf("1 - Verificar a ocupação dos apartamentos\n");
+        printf("1 - Verificar a ocupacao dos apartamentos\n");
         printf("2 - Reservar um quarto\n");
         printf("3 - Check-in de hospede\n");
         printf("4 - Check-out de hospede\n");
         printf("5 - Cancelar reserva\n");
         printf("6 - Verificar disponibilidade do quarto\n");
-        printf("7 - Ver informações do hospede\n");
-        printf("8 - Ver métricas de ocupação dos quartos\n");
+        printf("7 - Ver informacoes do hospede\n");
+        printf("8 - Ver metricas de ocupacao dos quartos\n");
         printf("12 - Sair\n");
         printf("---------------------------------------\n");
         scanf("%d", &opcao);
@@ -190,7 +191,7 @@ int main(void)
                 printf("Saindo da aplicacao");
                 break;
             default:
-                printf("Opção invalida. Tente novamente.\n");
+                printf("Opcao invalida. Tente novamente.\n");
         }
 
     } while(opcao != 12);
@@ -298,21 +299,21 @@ void fHospedeQuarto(Quarto matriz[20][14])
 
     if (status == 1) 
     {
-        printf("\nO apartamento %d no andar %d está reservado.\n", apto, andar);
+        printf("\nO apartamento %d no andar %d esta reservado.\n", apto, andar);
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
 
     }
     else if (status == 2) 
     {
-        printf("\nO apartamento %d no andar %d está ocupado.\n", apto, andar);
+        printf("\nO apartamento %d no andar %d esta ocupado.\n", apto, andar);
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
 
     } 
     else if (status == 4) 
     {
-        printf("\nO apartamento %d no andar %d está livre.\n", apto, andar);
+        printf("\nO apartamento %d no andar %d esta livre.\n", apto, andar);
 
     }
     else
@@ -551,7 +552,7 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
 
         if(status == -2)
         {
-            printf("Nao ha quartos disponiveis sob essas condiçoes.\n\n");
+            printf("Nao ha quartos disponiveis sob essas condicoes.\n\n");
             return -1;
         }
 
@@ -616,7 +617,7 @@ void fCancelarReserva(Quarto matriz[20][14])
 
         if(status == 2 || status == 4) //se o quarto estiver livre ou ocupado não é possível cancelar a reserva
        { 
-            printf("Operação indisponível para esse quarto. Tente outro \n\n");
+            printf("Operacao indisponivel para esse quarto. Tente outro \n\n");
             continue;
         }
 
@@ -649,7 +650,7 @@ void fCheckIn(Quarto matriz[20][14])
     printf("CHECK-IN DE HOSPEDE\n");
     printf("---------------------------------------\n");
 
-    printf("Já foi feita uma reserva previamente? (1-Sim e 0-Nao): ");
+    printf("Ja foi feita uma reserva previamente? (1-Sim e 0-Nao): ");
     scanf("%d", &booked);
 
     if (booked == 1)
@@ -662,7 +663,7 @@ void fCheckIn(Quarto matriz[20][14])
     }
     else
     {
-        printf("Opção inválida. Por favor, tente novamente escolhendo entre (1-Sim e 0-Nao)\n\n");
+        printf("Opcao invalida. Por favor, tente novamente escolhendo entre (1-Sim e 0-Nao)\n\n");
     }
 }
 
@@ -721,7 +722,7 @@ void fCheckInComReserva(Quarto matriz[20][14])
         } 
         else 
         {
-            printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Não): ", 20-andarapto[0], andarapto[1]+1);
+            printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Nao): ", 20-andarapto[0], andarapto[1]+1);
             int confirmar;
             scanf("%d", &confirmar);
 
@@ -769,6 +770,7 @@ int fDefinirValorTipo(int tipo)
     {
         return 475;
     }
+    return 0;
 }
 
 //Calcula o valor total da estadia de um hospede
@@ -827,7 +829,7 @@ void fCheckOut(Quarto matriz[20][14])
 
     do 
    {
-        printf("Para fazer o check-out precisamos de algumas informações: \n");
+        printf("Para fazer o check-out precisamos de algumas informacoes: \n");
 
         printf("O Andar do apartamento que o hospede esta ocupando(0 para sair): ");
         scanf("%d", &andar);
@@ -859,7 +861,7 @@ void fCheckOut(Quarto matriz[20][14])
 
         if (status == 3)
         {
-          printf("O apartamento escolhido parece não existir. Por favor, tente outro.\n\n");
+          printf("O apartamento escolhido parece nao existir. Por favor, tente outro.\n\n");
         }
 
         if (status == 4)
@@ -1076,12 +1078,12 @@ void fTaxaOcupacao(Quarto matriz[20][14])
 
     system("cls||clear");
     printf("---------------------------------------\n");
-    printf("MÉTRICAS DE OCUPAÇÃO DO HOTEL\n");
+    printf("METRICAS DE OCUPACAO DO HOTEL\n");
     printf("---------------------------------------\n\n");
 
 
     printf(" -----------------------------------------\n");
-    printf("| VISÃO GERAL DO HOTEL                    |\n");
+    printf("| VISAO GERAL DO HOTEL                    |\n");
     printf("| %.2f%% dos apartamentos estao ocupados   |\n", ocupadosTotal);
     printf("| %.2f%% dos apartamentos estao reservados |\n", reservadosTotal);
     printf("| %.2f%% dos apartamentos estao livres   |\n", livresTotal);
