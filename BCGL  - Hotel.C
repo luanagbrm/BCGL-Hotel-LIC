@@ -1,24 +1,27 @@
-//BCGL-Hotel-Ativ04 - Programa Hotel.
-//Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (09/06/2024).
+//BCGL-Hotel-Ativ05 - Programa Hotel.
+//Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (16/06/2024).
 //O Hotel deve conter 20 andares e 14 apartamentos por andar.
 /*Apresentar um menu acessível para o úsuario.
 O Menu deve permitir e encaminhar o úsuario:
 1 - Verificar a ocupacao dos quartos, mostrando os andares e apartamentos do hotel;
 
-2- Definir três tipos de apartamentos para o hotel. "Standard", "Master" e "Deluxe", sendo que o "Standard" terá um valor mais barato e
-terá uma quantidade de apartamento maior que os outros, o "Master" será um pouco mais caro e o "Delux" será o mais caro e terá menos apartamentos.
-Além disso, o apartamento será decidido a partir da quantidade de dias de estadia e quantas pessoas serão hospedadas.
+2- Definir três tipos de apartamentos para o hotel: "Standard", "Master" e "Deluxe". 
+    - "Standard" será o mais barato e contará com os apartamentos do andar 1 ao 14.
+    - "Master" será um pouco mais caro e contará com os apartamentos do andar 14 ao 18.
+    - "Deluxe" será o mais caro e contará com os apartamentos dos andares 19 e 20.
+Além disso, o apartamento será decidido também a partir da quantidade de pessoas hospedadas. Sendo os apartamentos de 1 a 4 para até 2 pessoas (single), de 5 a 9 para até 3 pessoas (couple), de 10 a 14 para até 5 pessoas (family). 
+    - O sistema dará preferência para ocupar os apartamentos de menor capacidade primeiro.
 
 3 - Reservar um apartamento a partir da solicitação do cadastro do hospede, o tipo de apartamento que ele deseja, a
-quantidade de dias de estadia e quantas pessoas ficaram hospedadas (Deve aparecer 'R' para Reservado e 'O' para Ocupado); 
+quantidade de dias de estadia e quantas pessoas ficarão hospedadas (Deve aparecer 'R' para Reservado e 'O' para Ocupado); 
 
 4- O cadastro deve solicitar o nome, cpf, telefone, email, cep, endereço, bairro, cidade e uf do hospede;
 
-5 - Realizar o check-in de hospede a partir de uma reserva realizada (solicitar o cpf para realizar o chek-in com mais facilidade).
+5 - Realizar o check-in de hospede a partir de uma reserva realizada (solicitar o cpf para realizar o check-in com mais facilidade).
 E tornar possível realizar o check-in no hotel de hospede que não fez reserva;
 
 6 - Realizar o check-out de hospede, isto é, liberar o apartamento que estava ocupado. Além disso, é preciso mostrar 
-uma fixa dos dados de estadia, contendo o tipo de apartamento escolhido, os dias de estadia e o valor total a ser pago;
+uma ficha dos dados de estadia, contendo o tipo de apartamento escolhido, o valor da diária, os dias de estadia e o valor total a ser pago;
 
 7- Tornar possível cancelar uma reserva;
 
@@ -26,8 +29,7 @@ uma fixa dos dados de estadia, contendo o tipo de apartamento escolhido, os dias
 
 9- Ver informações do hospede;
 
-10- Verificar métricas de ocupação dos quartos, mostrando a porcentagem dos apartamentos
-que estão ocupados, reservados e livres;
+10- Verificar métricas de ocupação dos quartos, mostrando a porcentagem dos apartamentos que estão ocupados, reservados e livres;
 
 11 - Permitir que o úsuario saia do programa ao digitar 12;
 */
@@ -38,7 +40,7 @@ que estão ocupados, reservados e livres;
 
 //Structures importantes para o programa
 
-//struct para as informacoes pessoais do hospede
+//Estrutura para armazenar o endereco do hospede
 typedef struct{
   char cep[14];
   char endereco[60];
@@ -47,16 +49,16 @@ typedef struct{
   char uf[3];
 }EndCompleto;
 
-//Estrutura para o endereco do hospede
+//Estrutura para armazenar as informacoes pessoais do hospede
 typedef struct{
   char nome[40];
   char cpf[12];
   char telefone[12];
   char email[20];
   EndCompleto endereco;
-} Hospede; // Guarda informações do hóspede
+} Hospede; 
 
-// Estrutura para a reserva do quarto
+// Estrutura para armazenar a reserva do quarto
 typedef struct
 {
   int qntHospede;
@@ -75,7 +77,7 @@ typedef struct
 
 
 // Variáveis globais
-//divisão por tipo 
+//divisão por tipo de apartamento
 int standard[2]={14,1}; 
 int master[2]={18,15}; 
 int deluxe[2]={20,19};
@@ -113,7 +115,7 @@ int fVerificaTipoApto(int qtd);
 int fDeterminarMaisProximo(int sequencia[], int andarPref);
 int fDeterminarAndar(int andarPref, int tipo);
 int fDeterminarAndarApto(int andarPref, int tipoAndar, Quarto matriz[20][14], int qtd, int andarapto[2]);
-void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, int tipo, Hospede hospede, int qtd, int diasEstadia);
+void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, Hospede hospede, int qtd, int diasEstadia);
 void fCancelarReserva(Quarto matriz[20][14]);
 
 //Funções relacionadas às funcionalidades do check-in
@@ -202,6 +204,19 @@ void fInicializarMatriz(Quarto matriz[20][14])
     for (int i = 0; i < 20; i++)
       for (int j = 0; j < 14; j++) 
         matriz[i][j].situacao = '.'; // Define todos os quartos como livres inicialmente
+
+    //Atribui o tipo de cada apartamento de acordo com a sua posição no mapa do hotel
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 14; j++) 
+            matriz[i][j].tipo = 3;
+
+    for (int i = 2; i < 6; i++)
+        for (int j = 0; j < 14; j++) 
+            matriz[i][j].tipo = 2;
+
+    for (int i = 6; i < 20; i++)
+        for (int j = 0; j < 14; j++) 
+            matriz[i][j].tipo = 1;
 }
 
 // Apresenta o mapa de ocupação do hotel
@@ -227,10 +242,9 @@ void fMapaHotel(Quarto matriz[20][14])
 }
 
 //Guarda os dados do hospede para utilizações futuras
-void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, int tipo, Hospede hospede, int qtd, int diasEstadia)
+void GuardarDadosQuarto(Quarto matriz[20][14], int i, int j, Hospede hospede, int qtd, int diasEstadia)
 {
     matriz[i][j].hospede = hospede;
-    matriz[i][j].tipo = tipo;
     matriz[i][j].reserva.qntHospede = qtd;
     matriz[i][j].reserva.diasEstadia = diasEstadia;
 }
@@ -263,12 +277,12 @@ void fHospedeQuarto(Quarto matriz[20][14])
     printf("---------------------------------------\n");
     printf("VERIFICAR DISPONIBILIDADE DO APARTAMENTO\n");
     printf("---------------------------------------\n");
-    
-	printf("Digite o andar (0 para sair): ");
+
+    printf("Digite o andar (0 para sair): ");
     scanf("%d", &andar);
 
     if (andar == 0) 
-	{
+    {
         return; //dá um retorno vazio para sair da função
     }
 
@@ -276,33 +290,33 @@ void fHospedeQuarto(Quarto matriz[20][14])
     scanf("%d", &apto);
 
     if (apto == 0)
-	{
+    {
         return;
     }
 
     int status = fVerificaApartamento(matriz, andar, apto);
 
     if (status == 1) 
-	{
+    {
         printf("\nO apartamento %d no andar %d está reservado.\n", apto, andar);
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
-           
+
     }
-	else if (status == 2) 
-	{
+    else if (status == 2) 
+    {
         printf("\nO apartamento %d no andar %d está ocupado.\n", apto, andar);
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
-            
+
     } 
-	else if (status == 4) 
-	{
+    else if (status == 4) 
+    {
         printf("\nO apartamento %d no andar %d está livre.\n", apto, andar);
-            
+
     }
-	else
-	{
+    else
+    {
         printf("\nApartamento inexistente.\n");
     }
 
@@ -322,19 +336,20 @@ void fclearBuffer()
 //Determina o andar mais próximo possível ao que foi dado como preferência pelo usuário, levando em consideração o tipo de apartamento
 int fDeterminarMaisProximo(int sequencia[], int andarPref) 
 {
-    int dif, menor = 99, posicao = 0, i = sequencia[1];
+    int dif, menorDif = 99, posicao = 0, i = sequencia[1]; 
 
+    //Percorre os andares que pertencem ao tipo de apartamento escolhido pelo usuário e os compara com o andar de preferência do usuário
     for (int i = sequencia[1]; i <= sequencia[0]; i++) 
-	{ 
-        dif = andarPref - i;
+    { 
+        dif = andarPref - i; // diferença entre o andar de preferência e os andares possíveis
         if (dif < 0) 
-		{
-            dif = -dif;
+        {
+            dif = -dif; // valor absoluto da diferença
         }
-        if (dif < menor) 
-		{
-            menor = dif;
-            posicao = i;
+        if (dif < menorDif) 
+        {
+            menorDif = dif;
+            posicao = i; //armazena o andar da nova menor diferença
         }
     }
 
@@ -344,17 +359,17 @@ int fDeterminarMaisProximo(int sequencia[], int andarPref)
 int fDeterminarAndar(int andarPref, int tipo)
 {
     if(tipo == 1)
-	{
+    {
         return fDeterminarMaisProximo(standard, andarPref);
     }
 
     if(tipo == 2)
-	{
+    {
         return fDeterminarMaisProximo(master, andarPref);
     }
 
     if(tipo == 3)
-	{
+    {
         return fDeterminarMaisProximo(deluxe, andarPref);
     }
 
@@ -365,22 +380,22 @@ int fDeterminarAndar(int andarPref, int tipo)
 int fVerificaTipoApto(int qtd)
 {
     if(qtd < 1 || qtd > 5)
-	{
+    {
         return 10; //o quarto precisa ter pelo menos 1 hospede e no máximo 5 hospedes
     }
 
     if(qtd <= 2)
-	{
+    {
         return 1; // quarto do tipo single
     }
 
     if(qtd <= 3)
-	{
+    {
         return 2; // quarto do tipo double
     }
 
     if(qtd < 6)
-	{
+    {
         return 3; // quarto do tipo family
     }
 
@@ -395,51 +410,51 @@ int fDeterminarAndarApto(int andarPref, int tipoAndar, Quarto matriz[20][14], in
     int andares[2]; 
     int aptos[2]; 
 
-    // Define os limites dos andares com base no tipo
+    // Define os limites dos andares com base no tipo de apartamento
     if (tipoAndar == 1) 
-	{
+    {
         andares[1] = standard[1];
         andares[0] = standard[0];
     } 
-	else if (tipoAndar == 2) 
-	{
+    else if (tipoAndar == 2) 
+    {
         andares[1] = master[1];
         andares[0] = master[0];
     } 
-	else 
-	{
+    else 
+    {
         andares[1] = deluxe[1];
         andares[0] = deluxe[0];
     }
 
     do 
-	{
-        // Define os limites quartos com base no tipo 
+    {
+        // Define os limites dos quartos com base na qtd de hospedes 
         if (tipoApto == 1) 
-		{
+        {
             aptos[1] = single[1];
             aptos[0] = single[0];
         } 
-		else if (tipoApto == 2) 
-		{
+        else if (tipoApto == 2) 
+        {
             aptos[1] = couple[1];
             aptos[0] = couple[0];
         }
-		else if (tipoApto == 3)
-		{
+        else if (tipoApto == 3)
+        {
             aptos[1] = family[1];
             aptos[0] = family[0];
         } 
-		else 
-		{
+        else 
+        {
             return -2; //caso não seja nenhum dos tipos de quarto, encerra a função
         }
 
         // Verifica primeiro se existe um quarto disponivel e compatível no andar mais próximo a preferencia do hospede
         for (int j = aptos[1]; j <= aptos[0]; j++) 
-		{
+        {
             if (matriz[20 - andarPossivel][j - 1].situacao == '.') 
-			{
+            {
                 andarapto[0] = 20 - andarPossivel; // retorna por meio de um array o andar
                 andarapto[1] = j - 1;              // e o quarto 
                 return 0;
@@ -448,11 +463,11 @@ int fDeterminarAndarApto(int andarPref, int tipoAndar, Quarto matriz[20][14], in
 
         // Caso não exista, verifica se existe um quarto disponivel nos andares acima da preferência do hospede
         for(int i = andarPossivel + 1; i <= andares[0]; i++)
-		{
+        {
             for (int j = aptos[1]; j <= aptos[0]; j++) 
-			{
+            {
                 if (matriz[20 - i][j - 1].situacao == '.') 
-				{
+                {
                     andarapto[0] = 20 - i;
                     andarapto[1] = j - 1;
                     return 0; // 
@@ -462,11 +477,11 @@ int fDeterminarAndarApto(int andarPref, int tipoAndar, Quarto matriz[20][14], in
 
         // Caso também não exista, verifica se existe um quarto disponivel nos andares abaixo da preferencia
         for(int i = andarPossivel - 1; i >= andares[1]; i--)
-		{
+        {
             for (int j = aptos[1]; j <= aptos[0]; j++) 
-			{
+            {
                 if (matriz[20 - i][j - 1].situacao == '.') 
-				{
+                {
                     andarapto[0] = 20 - i;
                     andarapto[1] = j - 1;
                     return 0; 
@@ -491,7 +506,7 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
     hospede = fHospedeInfo(); //pede os dados do hospede antes de fazer uma reserva
     if(campoVazio(hospede) == 1)
         return -1;
-    
+
     do
     {
         printf("Quantas pessoas estao incluidas na estadia?(0 para sair): ");
@@ -503,7 +518,7 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
         qtdValida = fVerificaTipoApto(qtd);
 
         if(qtdValida == 10)
-		{
+        {
             printf("Nao ha apartamentos para essa quantidade de hospedes.\n\n");
             continue;
         }
@@ -515,7 +530,7 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
             return -1;
 
         if(tipo < 0 || tipo > 3)
-		{
+        {
             printf("Tipo de quarto invalido.\n\n");
             continue;
         }
@@ -535,17 +550,26 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
         int status = fDeterminarAndarApto(pref, tipo, matriz, qtd, andarap);
 
         if(status == -2)
-		{
+        {
             printf("Nao ha quartos disponiveis sob essas condiçoes.\n\n");
             return -1;
         }
-            
-        GuardarDadosQuarto(matriz, andarap[0], andarap[1], tipo, hospede, qtd, dias);
-    } while(qtdValida == 10 || tipo < 0 || tipo > 3);
+
+        GuardarDadosQuarto(matriz, andarap[0], andarap[1], hospede, qtd, dias);
+    } while(qtdValida == 10 || tipo < 0 || tipo > 3); //enquanto a quantidade de hospedes ou o tipo de quarto estiver fora do intervalo
 
     return 0;
 }
-// Realiza uma reserva
+
+void fReserva(int i, int j, Quarto matriz[20][14])
+{
+    matriz[i][j].situacao = 'R';
+    system("cls||clear");
+    fMapaHotel(matriz);
+    printf("\nReserva realizada com sucesso do quarto %d no andar %d\n\n", j+1, 20-i);
+}
+
+
 void fEfetuarReserva(Quarto matriz[20][14])
 {
     int andarapto[2];
@@ -555,20 +579,12 @@ void fEfetuarReserva(Quarto matriz[20][14])
     printf("RESERVAR UM QUARTO\n");
     printf("---------------------------------------\n");
     if(fDadosReserva(matriz, andarapto) == -1)
-	{
-        return;
+    {
+        return; //caso o usuário tenha interrompido a função dos dados da reserva, o programa não seguirá com a reserva
     }
     fReserva(andarapto[0], andarapto[1], matriz);
 }
 
-
-void fReserva(int i, int j, Quarto matriz[20][14])
-{
-    matriz[i][j].situacao = 'R';
-    system("cls||clear");
-    fMapaHotel(matriz);
-    printf("\nReserva realizada com sucesso do quarto %d no andar %d\n\n", j+1, 20-i);
-}
 
 //Cancela a reserva do hospede e retira a visualização do apartamento reservado ('R') 
 void fCancelarReserva(Quarto matriz[20][14]) 
@@ -672,64 +688,64 @@ void fCheckInComReserva(Quarto matriz[20][14])
 
     do
     {
-        // Solicita o CPF do hóspede
         printf("Informe o CPF do hospede para buscar a reserva (0 para sair): ");
         scanf("%s", cpf);
 
         if(strcmp(cpf, "0") == 0) 
-		{
-            break;
+        {
+            break; 
         }
 
-        // Verifica se há uma reserva para o CPF informado
+        
         reservaEncontrada = 0; // Reinicia a variável de controle
-        int encontrado = fVerificaHospede(cpf, matriz, andarapto);
+        int encontrado = fVerificaHospede(cpf, matriz, andarapto); //retorna se o cpf já foi cadastrado e, se sim, retorna também o andar e o apartamento onde esta alocado esse hospede 
+
+        // Verifica se há uma reserva para o CPF informado
         if(encontrado && matriz[andarapto[0]][andarapto[1]].situacao == 'R')
             reservaEncontrada = 1;
 
         if (reservaEncontrada == 0) 
-		{
+        {
             printf("Nenhuma reserva encontrada para o CPF informado.\n");
             printf("Gostaria de realizar o check-in sem reserva? (1-Sim, 0-Não): ");
             scanf("%d", &booked);
             if (booked == 1) 
-			{
+            {
                 fCheckInSemReserva(matriz);
                 break;
             } 
-			else 
-			{
+            else 
+            {
                 continue; // Volta a solicitar o CPF
             }
         } 
-		else 
-		{
-            // Solicita confirmação do hóspede
+        else 
+        {
             printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Não): ", 20-andarapto[0], andarapto[1]+1);
             int confirmar;
             scanf("%d", &confirmar);
-    
+
             if (confirmar != 1) 
-			{
+            {
                 printf("Check-in cancelado.\n");
                 break;
             }
-    
+
             // Realiza o check-in
             fRealizarCheckIn(matriz, andarapto);
             break; // Sai da função após realizar o check-in
         }
-    
+
     } while(1);
 }
 
-// Realiza o check-in para um hóspede não possui reserva
+// Realiza o check-in para um hóspede que não possui reserva
 void fCheckInSemReserva(Quarto matriz[20][14])
 {
     int andarapto[2];
 
     if(fDadosReserva(matriz, andarapto) == -1)
-	{
+    {
         return;
     }
     fRealizarCheckIn(matriz, andarapto);
@@ -740,17 +756,17 @@ void fCheckInSemReserva(Quarto matriz[20][14])
 int fDefinirValorTipo(int tipo)
 {
     if(tipo == 1)
-	{
+    {
         return 250;
     } 
 
     if(tipo == 2)
-	{
+    {
         return 375;
     }
 
     if(tipo == 3)
-	{
+    {
         return 475;
     }
 }
@@ -761,29 +777,31 @@ int fDefinirValorTotal(int tipo, int dias)
     return fDefinirValorTipo(tipo)*dias;
 }
 
-//Define o nome para o tipo de apartamento presente no hotel
+//Retorna o nome do tipo de apartamento cujo o hospede estava hospedado
 void fDefinirNomeTipo(int tipo, char nomeTipo[9])
 {
     if(tipo == 1)
-	{
-        strcpy(nomeTipo, "Standard"); 
-    } 
+    {
+        strcpy(nomeTipo, "Standard"); // atribui o nome do tipo de apartamento para a variável nomeTipo informada na chamada da função
+    }
+    
     if(tipo == 2)
-	{
+    {
         strcpy(nomeTipo, "Master"); 
     }
     if(tipo == 3)
-	{
+    {
         strcpy(nomeTipo, "Deluxe"); 
     }
 }
 
+//Cria uma nota contendo as informações da estadia do hospede com informações relevantes para a hora do pagamento
 void fDadosCheckOut(Quarto matriz[20][14], int andar, int apto)
 {
     char nomeTipo[9];
     fDefinirNomeTipo(matriz[20 - andar][apto - 1].tipo, nomeTipo);
-    
-    printf("Check-Out realizado com sucesso.");
+
+    printf("\nCheck-Out realizado com sucesso.");
     printf("\n\n---------------------------------------\n");
     printf("RESUMO DA ESTADIA\n");
     printf("---------------------------------------\n");
@@ -806,7 +824,7 @@ void fCheckOut(Quarto matriz[20][14])
     printf("CHECK-OUT DE HOSPEDE\n");
     printf("---------------------------------------\n");
     fMapaHotel(matriz);
-    
+
     do 
    {
         printf("Para fazer o check-out precisamos de algumas informações: \n");
@@ -830,7 +848,7 @@ void fCheckOut(Quarto matriz[20][14])
             printf("O apartamento escolhido esta reservado. Por favor, tente outro.\n\n");
         }
         if (status == 2)
-       {    
+        {    
             matriz[20 - andar][apto - 1].situacao = '.';
             system("cls||clear");
             printf("\nO check-out foi realizado com sucesso para o apartamento %d no andar %d!\n", apto, andar);
@@ -856,9 +874,9 @@ int fDadosHospedePorCPF(char cpf[12], Quarto matriz[20][14])
 {
     int andarapto[2] = {0,0};
     int encontrado = fVerificaHospede(cpf, matriz, andarapto);
-    
+
             if(encontrado == 1)
-			{
+            {
                 Hospede hospede = matriz[andarapto[0]][andarapto[1]].hospede;
                 fImprimirDados(hospede);
                 return 1;
@@ -892,7 +910,7 @@ Hospede fHospedeInfo()
     gets(hospede.cpf);
 
     if(strcmp(hospede.cpf, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -901,7 +919,7 @@ Hospede fHospedeInfo()
     gets(hospede.nome);
 
     if(strcmp(hospede.nome, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -909,7 +927,7 @@ Hospede fHospedeInfo()
     gets(hospede.telefone);
 
     if(strcmp(hospede.telefone, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -917,7 +935,7 @@ Hospede fHospedeInfo()
     gets(hospede.email);
 
     if(strcmp(hospede.nome, "+") == 0)
-	{
+    {
         return hospede;
     } 
 
@@ -927,7 +945,7 @@ Hospede fHospedeInfo()
     gets(hospede.endereco.cep);
 
     if(strcmp(hospede.endereco.cep, "+") == 0)
-	{
+    {
         return hospede;
     } 
 
@@ -935,7 +953,7 @@ Hospede fHospedeInfo()
     gets(hospede.endereco.endereco);
 
     if(strcmp(hospede.endereco.endereco, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -943,7 +961,7 @@ Hospede fHospedeInfo()
     gets(hospede.endereco.bairro);
 
     if(strcmp(hospede.endereco.bairro, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -951,7 +969,7 @@ Hospede fHospedeInfo()
     gets(hospede.endereco.cidade);
 
     if(strcmp(hospede.endereco.bairro, "+") == 0)
-	{
+    {
         return hospede;
     }
 
@@ -959,11 +977,11 @@ Hospede fHospedeInfo()
     gets(hospede.endereco.uf);
 
     if(strcmp(hospede.endereco.bairro, "+") == 0)
-	{
+    {
         return hospede;
     }
 
-    printf("\nAs informacoes do hospede foram cadastradas com sucesso!\n");
+    printf("\nAs informacoes do hospede foram cadastradas com sucesso!\n\n");
     return hospede;
 }
 
@@ -978,11 +996,11 @@ int campoVazio(Hospede hospede)
         hospede.endereco.bairro[0] == '+' ||
         hospede.endereco.cidade[0] == '+' ||
         hospede.endereco.uf[0] == '+') {
-        return 1; //Input valido
+        return 1; // Input com caractere indicando cancelamento da operação
     } 
-	else 
-	{
-        return 0; // input vazio
+    else 
+    {
+        return 0; // input valido
     }
 }
 
@@ -1000,8 +1018,8 @@ int dataValidation(Hospede hospede)
         hospede.endereco.uf[0] != '\0') {
         return 1; //Input valido
     } 
-	else 
-	{
+    else 
+    {
         return 0; // input vazio
     }
 }
@@ -1011,7 +1029,7 @@ void fImprimirDados(Hospede hospede)
 {
     if(dataValidation(hospede))
     {
-    	
+
         system("cls||clear");
         printf("---------------------------------------\n");
         printf("Informacoes cadastradas do hospede:\n");
@@ -1027,8 +1045,8 @@ void fImprimirDados(Hospede hospede)
         printf("Cidade: %s\n", hospede.endereco.cidade);
         printf("UF: %s\n", hospede.endereco.uf);
     } 
-	else 
-	{
+    else 
+    {
         printf("\nNao foi possivel encontrar nenhuma informacao cadastrada do hospede. Tente realizar o cadastramento primeiro\n");
     }
 }
@@ -1036,6 +1054,7 @@ void fImprimirDados(Hospede hospede)
 //Mostra ao usuario a porcentagem de ocupacao em relacao a todos os quartos do hotel
 void fTaxaOcupacao(Quarto matriz[20][14])
 {
+    // Métricas absolutas
     double contadorOcupado = 0;
     double contadorReservado = 0;
 
@@ -1050,7 +1069,10 @@ void fTaxaOcupacao(Quarto matriz[20][14])
         }
     }
 
-
+    double ocupadosTotal, livresTotal, reservadosTotal;
+    ocupadosTotal = (contadorOcupado/280)*100;
+    reservadosTotal = (contadorReservado/280)*100;
+    livresTotal = ((280-(contadorReservado+contadorOcupado))/280)*100;
 
     system("cls||clear");
     printf("---------------------------------------\n");
@@ -1058,12 +1080,12 @@ void fTaxaOcupacao(Quarto matriz[20][14])
     printf("---------------------------------------\n\n");
 
 
-    printf(" ---------------------------------------\n");
-    printf("|%.2f%% dos apartamentos estao ocupados  |\n", (contadorOcupado/280)*100);
-    printf("|%.2f%% dos apartamentos estao reservados|\n", (contadorReservado/280)*100);
-    printf("|%.2f%% dos apartamentos estao livres  |\n",
-        (((280-(contadorReservado+contadorOcupado))/280)*100));
-    printf(" ---------------------------------------");
+    printf(" -----------------------------------------\n");
+    printf("| VISÃO GERAL DO HOTEL                    |\n");
+    printf("| %.2f%% dos apartamentos estao ocupados   |\n", ocupadosTotal);
+    printf("| %.2f%% dos apartamentos estao reservados |\n", reservadosTotal);
+    printf("| %.2f%% dos apartamentos estao livres   |\n", livresTotal);
+    printf(" -----------------------------------------\n\n");
 }
 
 int fVerificaHospede(char cpfReserva[12], Quarto matriz[20][14], int andarapto[2])
