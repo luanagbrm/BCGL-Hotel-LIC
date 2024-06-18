@@ -158,7 +158,7 @@ int main(void)
         printf("6 - Verificar disponibilidade do quarto\n");
         printf("7 - Ver informacoes do hospede\n");
         printf("8 - Ver metricas de ocupacao dos quartos\n");
-        printf("12 - Sair\n");
+        printf("9 - Sair\n");
         printf("---------------------------------------\n");
         scanf("%d", &opcao);
 
@@ -188,14 +188,14 @@ int main(void)
             case 8:
                 fTaxaOcupacao(Tab);
                 break;
-            case 12:
+            case 9:
                 printf("Saindo da aplicacao");
                 break;
             default:
                 printf("Opção invalida. Tente novamente.\n");
         }
 
-    } while(opcao != 12);
+    } while(opcao != 9);
 
     return 0;
 }
