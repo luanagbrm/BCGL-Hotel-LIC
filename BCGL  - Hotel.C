@@ -556,7 +556,7 @@ int fDadosReserva(Quarto matriz[20][14], int andarap[2])
 
         if(status == -2)
         {
-            printf("Nao ha quartos disponiveis sob essas condiçoes.\n\n");
+            printf("Nao ha quartos disponiveis sob essas condicoes.\n\n");
             return -1;
         }
 
@@ -621,7 +621,7 @@ void fCancelarReserva(Quarto matriz[20][14])
 
         if(status == 2 || status == 4) //se o quarto estiver livre ou ocupado não é possível cancelar a reserva
        { 
-            printf("Operaçao indisponível para esse quarto. Tente outro \n\n");
+            printf("Operacao indisponivel para esse quarto. Tente outro \n\n");
             continue;
         }
 
