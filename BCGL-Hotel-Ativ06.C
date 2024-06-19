@@ -33,7 +33,7 @@ uma ficha dos dados de estadia, contendo o tipo de apartamento escolhido, o valo
 
 10- Verificar métricas de ocupação dos quartos, mostrando a porcentagem dos apartamentos que estão ocupados, reservados e livres;
 
-11 - Permitir que o úsuario saia do programa ao digitar 12;
+11 - Permitir que o úsuario saia do programa ao digitar 9;
 */
 
 #include <stdio.h>
