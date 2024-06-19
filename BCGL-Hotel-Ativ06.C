@@ -2,8 +2,8 @@
 //Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (18/06/2024).
 //O Hotel deve conter 20 andares e 14 apartamentos por andar.
 /*Apresentar um menu acessível para o usuário.
-O Menu deve permitir e encaminhar o usuario:
-1 - Verificar a ocupacao dos quartos, mostrando os andares e apartamentos do hotel;
+O Menu deve permitir e encaminhar o usuário:
+1 - Verificar a ocupação dos quartos, mostrando os andares e apartamentos do hotel;
 
 2- Definir três tipos de apartamentos para o hotel: "Standard", "Master" e "Deluxe". 
     - "Standard" será o mais barato e contará com os apartamentos do andar 1 ao 14.
