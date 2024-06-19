@@ -1,4 +1,4 @@
-//BCGL-Hotel-Ativ05 - Programa Hotel.
+//BCGL-Hotel-Ativ06 - Programa Hotel.
 //Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (16/06/2024).
 //O Hotel deve conter 20 andares e 14 apartamentos por andar.
 /*Apresentar um menu acessível para o úsuario.
@@ -7,13 +7,15 @@ O Menu deve permitir e encaminhar o úsuario:
 
 2- Definir três tipos de apartamentos para o hotel: "Standard", "Master" e "Deluxe". 
     - "Standard" será o mais barato e contará com os apartamentos do andar 1 ao 14.
-    - "Master" será um pouco mais caro e contará com os apartamentos do andar 14 ao 18.
+    - "Master" será um pouco mais caro e contará com os apartamentos do andar 15 ao 18.
     - "Deluxe" será o mais caro e contará com os apartamentos dos andares 19 e 20.
 Além disso, o apartamento será decidido também a partir da quantidade de pessoas hospedadas. Sendo os apartamentos de 1 a 4 para até 2 pessoas (single), de 5 a 9 para até 3 pessoas (couple), de 10 a 14 para até 5 pessoas (family). 
     - O sistema dará preferência para ocupar os apartamentos de menor capacidade primeiro.
 
 3 - Reservar um apartamento a partir da solicitação do cadastro do hospede, o tipo de apartamento que ele deseja, a
-quantidade de dias de estadia e quantas pessoas ficarão hospedadas (Deve aparecer 'R' para Reservado e 'O' para Ocupado); 
+quantidade de dias de estadia, um andar de preferência e quantas pessoas ficarão hospedadas (Deve aparecer 'R' para Reservado e 'O' para Ocupado); 
+    - Ao informar o andar de prefêrencia, o sistema buscará o andar mais próximo do informado pelo usuário dentro da faixa de andares que o tipo de apartamento que ele escolheu possui.
+        - Ex: caso o tipo seja master e o andar de prefêrencia 11, o sistema tentará alocá-lo no andar 15, o mais próximo de 11 entre os andares do tipo 2.
 
 4- O cadastro deve solicitar o nome, cpf, telefone, email, cep, endereço, bairro, cidade e uf do hospede;
 
