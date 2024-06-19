@@ -717,7 +717,6 @@ void fCheckInComReserva(Quarto matriz[20][14])
         reservaEncontrada = 0; // Reinicia a variável de controle 
         encontrado = CpfApto(cpf, andar, apto, matriz, andarapto);
         status = fVerificaApartamento(matriz, 20 - andarapto[0], andarapto[1] + 1);
-        printf("%d", status);
         if(encontrado == 0){
             printf("O CPF informado nao corresponde ao cadastrado neste quarto. Informe novamente\n\n");
             break;
@@ -932,7 +931,6 @@ int CpfApto(char cpf[12], int andar, int apto, Quarto matriz[20][14], int andara
                 {
                     andarapto[0] = 20-i;
                     andarapto[1] = j-1;
-                    printf("Aa");
                     return 1;
                 }
             }
