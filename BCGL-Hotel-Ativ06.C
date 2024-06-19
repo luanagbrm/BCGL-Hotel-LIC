@@ -1,8 +1,8 @@
 //BCGL-Hotel-Ativ06 - Programa Hotel.
-//Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (16/06/2024).
+//Grupo: Beatriz Lima Morais, Carolina Olmos Gracio Castanho, Grazielle Batista de Almeida e Luana Gabrielle Rodrigues Macedo - (18/06/2024).
 //O Hotel deve conter 20 andares e 14 apartamentos por andar.
-/*Apresentar um menu acessível para o úsuario.
-O Menu deve permitir e encaminhar o úsuario:
+/*Apresentar um menu acessível para o usuário.
+O Menu deve permitir e encaminhar o usuario:
 1 - Verificar a ocupacao dos quartos, mostrando os andares e apartamentos do hotel;
 
 2- Definir três tipos de apartamentos para o hotel: "Standard", "Master" e "Deluxe". 
