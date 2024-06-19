@@ -306,20 +306,20 @@ void fHospedeQuarto(Quarto matriz[20][14])
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
     }
-        
+
     else if (status == 2) 
     {
         printf("\nO apartamento %d no andar %d esta ocupado.\n", apto, andar);
         Hospede hospede = matriz[20 - andar][apto - 1].hospede;
         fImprimirDados(hospede);
     } 
-        
+
     else if (status == 4) 
     {
         printf("\nO apartamento %d no andar %d esta livre.\n", apto, andar);
 
     }
-        
+
     else
     {
         printf("\nApartamento inexistente.\n");
@@ -723,11 +723,11 @@ void fCheckInComReserva(Quarto matriz[20][14])
             printf("O CPF informado nao corresponde ao cadastrado neste quarto. Informe novamente\n\n");
             break;
         }
-        
+
         if(encontrado && status == 1)
           reservaEncontrada = 1;
 
-        
+
         // Verifica se há uma reserva para o CPF informado
         if (reservaEncontrada == 0) 
         {
@@ -746,7 +746,7 @@ void fCheckInComReserva(Quarto matriz[20][14])
         } 
         else 
         {
-            printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Nao): ", andarapto[0] + 20, andarapto[1]+1);
+            printf("Reserva encontrada no andar %d, apartamento %d. Confirmar check-in? (1-Sim, 0-Nao): ", 20 - andarapto[0], andarapto[1]+1);
             int confirmar;
             scanf("%d", &confirmar);
 
@@ -966,7 +966,7 @@ Hospede fHospedeInfo(Quarto matriz[20][14])
       hospede = matriz[andarapto[0]][andarapto[1]].hospede;
       return hospede; //Verifica se já existe um cadastro com o mesmo CPF, caso sim, para de pedir as informações e retorna as informações do hospede já cadastrado
     }
-  
+
 
     printf("Nome do hospede (Digite '+' para cancelar): ");
     gets(hospede.nome);
