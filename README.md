@@ -1,89 +1,19 @@
-Quando for subir o arquivo pro repositório (só quando a gente concordar que ta tudo certinho i tals), usa esse script no terminal do codespace do vscode
+<b>REQUISITOS OBRIGATÓRIOS</b>
 
-git add *
+<b>REQ01</b> - O programa deve permitir ao usuário visualizar a ocupação dos apartamentos do hotel (mapa geral). 
 
-git commit -m "Explique o que você mexeu"
+<b>REQ02</b> - O programa deve permitir ao usuário fazer a reserva de um apartamento. 
 
-git branch -m main
+<b>REQ03</b> - O programa deve permitir ao usuário realizar o checkin no hotel a partir de uma reserva realizada.
 
-git push -u https://github.com/luanagbrm/Hotel-LIC main
+<b>REQ04</b> - O programa deve permitir ao usuário realizar o checkin no hotel de hospede que não fez reserva.
 
+<b>REQ05</b> - O programa deve permitir ao usuário realizar o checkout, ou seja, liberar o apartamento que estava ocupado.
 
+<b>REQ06</b> - O programa deve permitir ao usuário cancelar uma reserva.
 
+<b>REQ07</b> - O programa deve permitir ao usuário visualizar as taxas de ocupação e de reservas do hotel. 
 
-DOCUMENTAÇÃO:
+<b>REQ08</b> - O programa deve permitir ao usuário cadastrar as informações do hospede (CPF, nome, endereço completo, telefone celular e e-mail) no checkin. 
 
-Quais são os atributos do hospede?
-  - nome
-  - cpf
-  - Estrutura endereço
-  - telefone
-  - email
-  - data de nascimento
-
-Quais são os atributos da reserva?
-  - Tudo do apartamento
-  - Tudo do hospede
-  - qtd hospedes
-  - dias de estadia
-
-Quais são os atributos do apartamento?
-
-  - tipo
-  - qtd max de hospedes
-  - andar
-  - numero
-  - status
-
-Funções base:
-  1. fazer a reserva
-      - pergunta:
-        - qtd hospedes;
-        - necessidade especiais;
-        - tipo do apto;
-            - Determinar o apto  
-      - Adicionar o resto das informações da Estrutura reserva;
-    
-2. check-in
-     - pergunta:
-           - cpf
-             1. cpf encontrado
-               - fazer check-in
-             2. cpf não encontrado
-               - chamar função reserva
-               - fazer check-in
-
-3. check-out
-   - pergunta:
-       - cpf
-         - encontrar quarto
-         - calcular valor total
-         - apresentar dados da Reserva e o valor total
-        
-4. cancelar reserva
-  - cpf
-    - cancelar a reserva
-
-5. visualizar status
-   - apto e o andar
-     1. se disponivel
-       - informar disponibilidade
-     2. se indisponivel
-        - informar indisponibilidade
-        - informar os dados do hospede do quarto informado
-       
-Funções de apoio:
-  1. pedir dados do usuario
-  2. pedir dados da reserva
-  3. determinar apto
-  4. pedir cpf
-  5. determinar aptos por tipo e qtd
-
-
-   
-               
-             
-
-
-
-
+<b>REQ09</b> - O programa deve permitir ao usuário visualizar a situação de um apto. específico, e caso esteja ocupado, todas as informações do hospede.
