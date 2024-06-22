@@ -756,9 +756,6 @@ void fCheckInComReserva(Quarto matriz[20][14])
                 break;
             }
 
-            andarapto[0] = 20 - andar;
-            andarapto[1] = apto - 1;
-
             // Realiza o check-in
             fRealizarCheckIn(matriz, andarapto);
             break; // Sai da função após realizar o check-in
