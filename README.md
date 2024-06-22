@@ -1,10 +1,19 @@
+# PROJETO: SISTEMA DE HOTEL
+### Linguagens utilizadas:
+<img src = "https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" />
+
+### Desenvolvido por:
+@luanagbrm, @GaiaOcean, @bialim, @linagrac 
+
+## OBJETIVO
+
 • Desenvolver um programa em C para controlar a ocupação e reservas dos apartamentos do hotel. Deve ser mantido o status de cada apartamento e as opções de check-in/check-out e a apresentação da ocupação. 
 
 • Visando a simplificação por motivos pedagógicos, este projeto não está considerando qualquer controle de agenda, ignorando por completo as datas de reserva, datas de checkin e chekout, inclusive as disponibilidades de aptos no decorrer do tempo.
 
 • Todas as operações apresentadas nos requisitos a seguir, podem ser aperfeiçoadas e complementadas conforme a criatividade dos alunos, desde que atendam o que está sendo proposto nestes objetivos (continua a simplificação de não considerar datas).
 
-<b>REQUISITOS FUNCIONAIS</b>
+## REQUISITOS FUNCIONAIS
 
 <b>REQ01</b> - O programa deve permitir ao usuário visualizar a ocupação dos apartamentos do hotel (mapa geral). 
 
@@ -24,7 +33,7 @@
 
 <b>REQ09</b> - O programa deve permitir ao usuário visualizar a situação de um apto. específico, e caso esteja ocupado, todas as informações do hospede.
 
-<b>REQUISITOS FUNCIONAIS</b>
+## REQUISITOS OPCIONAIS
 
 <b>REQ10</b> - O programa deve permitir ao usuário quando fizer a reserva, já cadastrar os dados do hospede
 
@@ -35,7 +44,7 @@ imaginados e criados pelos alunos
 do grupo que valorizam e 
 aperfeiçoam o Projeto do Hotel.
 
-<b>FUNCIONALIDADES ADICIONADAS PELO GRUPO</b>
+## FUNCIONALIDADES ADICIONADAS PELO GRUPO
 
 <b>Divisão dos apartamentos: </b>Cada quarto possui duas categorias, uma definida pela capacidade de hóspedes e outra pelo preço.
 
@@ -52,6 +61,7 @@ aperfeiçoam o Projeto do Hotel.
 O sistema dá preferência por alocar os quartos de menor capacidade primeiro.
 
 Para definir o apto, o hóspede irá informar um andar de preferência e, a partir disso, o sistema alocará-lo no apartamento mais próximo do informado dentro da faixa de valores que o tipo de apartamento possui e considerando a quantidade de hóspedes na reserva.
-   Ex: tipo Master, andar de preferência 11 e 3 hospedes, o sistema tentará alocar, inicialmente, no apto 5, primeiro dos aptos para até 3 pessoas, do andar 15, o mais próximo do andar informado dentro dos andares do tipo Master
+   
+> Ex: tipo Master, andar de preferência 11 e 3 hospedes, o sistema tentará alocar, inicialmente, no apto 5, primeiro dos aptos para até 3 pessoas, do andar 15, o mais próximo do andar informado dentro dos andares do tipo Master
 
 <b>Verificação de cadastro:</b> No momento de cadastro do hóspede, ao digitar o CPF, o sistema verifica se esse CPF já foi cadastro e, caso sim, recupera os dados para essa nova reserva para evitar duplicidade de cadastro.
